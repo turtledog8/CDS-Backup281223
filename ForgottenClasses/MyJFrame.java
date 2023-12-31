@@ -1,3 +1,7 @@
+// This used to serve as a visual representation of the program with red dots representing the stations.
+//the usec could search and find the shortest path but since i now have a new manager class it doesnt work. it is only here as proof of its existencce
+
+
 //import Model.Station;
 //
 //import javax.swing.*;
@@ -10,10 +14,10 @@
 //
 //    private JTextArea resultTextArea;
 //    private MapPanel mapPanel;
-//    private Manager manager;
+//    private Manager2 manager;
 //
 //    public MyJFrame() {
-//        manager = new Manager();
+//        manager = new Manager2();
 //
 //        // Set up JFrame
 //        setTitle("Shortest Path Finder");
@@ -35,7 +39,7 @@
 //        searchStationButton.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
-//                // Call your Manager method to perform the search
+//                // Call your Manager2 method to perform the search
 //                String searchQuery = JOptionPane.showInputDialog("Enter station name:");
 //                List<String> searchResult = manager.binarySearchStationByNameFormatted(searchQuery);
 //
@@ -99,12 +103,12 @@
 //    }
 //
 //    private void onFindShortestPathButtonClick(String stationCode1, String stationCode2) {
-//        // Call your Manager method to find the shortest path
-//        manager.shortestPathPublic(stationCode1, stationCode2);
 //
-//        // Update the resultTextArea with the result
-//        Station startStation = manager.getStationByCode(stationCode1);
-//        Station endStation = manager.getStationByCode(stationCode2);
+//        Station startStation = manager.findStationByCode(stationCode1);
+//        Station endStation = manager.findStationByCode(stationCode2);
+//
+//
+//        manager.findShortestPathDijkstra(startStation, endStation);
 //
 //        if (startStation != null && endStation != null) {
 //            if (manager.getGraph().containsVertex(startStation) && manager.getGraph().containsVertex(endStation)) {
@@ -193,7 +197,7 @@
 //            g.drawImage(mapImage, xOffset, yOffset, scaledWidth, scaledHeight, null);
 //
 //            // Draw stations
-//            for (Station station : manager.getStations()) {
+//            for (Station station : manager.getAllStationsList()) {
 //                int x = mapLongitudeToX(station.getLongitude(), scaledWidth) + xOffset;
 //                int y = mapLatitudeToY(station.getLatitude(), scaledHeight) + yOffset;
 //

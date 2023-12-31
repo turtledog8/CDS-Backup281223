@@ -89,12 +89,10 @@ class DijkstraAlgorithmTest {
 
         DijkstraAlgorithm<String> dijkstra = new DijkstraAlgorithm<>();
 
-        // Use assertThrows to check for the expected exception
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 dijkstra.findShortestPath(graph, "A", "B")
         );
 
-        // Check if the exception message is as expected
         assertEquals("Negative weights are not allowed.", exception.getMessage());
     }
 
@@ -128,7 +126,6 @@ class DijkstraAlgorithmTest {
     void findShortestPath_equalSourceAndDestination() {
         MyGraph<String> graph = new MyGraph<String>(false, true);
 
-        // Creating a simple graph
         graph.addEdge("A", "B", 1.0);
 
         DijkstraAlgorithm<String> dijkstra = new DijkstraAlgorithm<>();

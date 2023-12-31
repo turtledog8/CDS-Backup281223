@@ -35,14 +35,15 @@ public class Connection implements Comparable<Connection> {
      */
     @Override
     public String toString() {
-        return "Connection{" +
-                "stationA=" + stationA +
-                ", stationB=" + stationB +
-                ", distance=" + distance +
-                ", dont=" + dont +
-                ", dont2=" + dont2 +
-                '}';
+        return String.format("Connection{%n" +
+                        "  stationA=%s%n" +
+                        "  stationB=%s%n" +
+                        "  distance=%d%n" +
+                        "}%n",
+                stationA, stationB, distance);
     }
+
+
 
     /**
      * Gets the starting station of the connection.

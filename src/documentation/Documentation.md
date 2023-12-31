@@ -1,6 +1,125 @@
 # DOCUMENTATION FOR COMPLEX DATA STRUCTURES
 
 --------------------------------------------------------------------------------------------------------------------------
+# Table of Contents
+
+## Data structures
+1. [MyArrayList](#myarraylist)
+    1. [Description](#description)
+    2. [Constructors](#constructors)
+    3. [Methods](#methods)
+    4. [Space Complexity](#space-complexity)
+
+2. [MyLinkedList](#mylinkedlist)
+    1. [Description](#description-1)
+    2. [Constructors](#constructors-1)
+    3. [Methods](#methods-1)
+    4. [Node Class](#node-class)
+    5. [Additional Methods](#additional-methods)
+
+3. [MyDoublyLinkedList](#mydoublylinkedlist)
+    1. [Description](#description-2)
+    2. [Constructors](#constructors-2)
+    3. [Methods](#methods-2)
+    4. [Node Class](#node-class-1)
+    5. [Iterator Class](#iterator-class)
+
+4. [MyGraph](#mygraph)
+    1. [Description](#description-3)
+    2. [Constructors](#constructors-3)
+    3. [Methods](#methods-3)
+    4. [Edge Class](#edge-class)
+    5. [Internal Methods](#internal-methods)
+
+5. [AVLTree](#avltree)
+    1. [Description](#description-4)
+    2. [Class: AVLTree<T extends Comparable<T>>](#class-avltreet-extends-comparablet)
+        1. [Constructors](#constructors-4)
+        2. [Methods](#methods-4)
+    3. [Inner Class: Node](#inner-class-node)
+        1. [Fields](#fields)
+        2. [Constructor](#constructor)
+    4. [Private Methods](#private-methods)
+
+6. [MyHashMap](#myhashmap)
+    1. [Description](#description-5)
+    2. [Class: MyHashMap<K, V> implements CustomMap<K, V>](#class-myhashmapk-v-implements-custommapk-v)
+        1. [Constructors](#constructors-5)
+        2. [Methods](#methods-5)
+    3. [Inner Class: MapNode<K, V>](#inner-class-mapnodek-v)
+        1. [Fields](#fields-1)
+        2. [Constructor](#constructor-1)
+        3. [Methods](#methods-6)
+    4. [Interface: CustomMap<K, V>](#interface-custommapk-v)
+        1. [Methods](#methods-7)
+        2. [Additional Methods](#additional-methods-1)
+
+7. [BinarySearchTree](#binarysearchtree)
+    1. [Description](#description-6)
+    2. [Class: BinarySearchTree<T extends Comparable<T>>](#class-binarysearchtreet-extends-comparablet)
+        1. [Fields](#fields-2)
+        2. [Constructors](#constructors-6)
+        3. [Methods](#methods-8)
+    3. [Inner Interface: NodeAction<T> (Functional Interface)](#inner-interface-nodeactiont-functional-interface)
+        1. [Methods](#methods-9)
+
+8. [MinHeap](#minheap)
+    1. [Description](#description-7)
+    2. [Class: MinHeap<T extends Comparable<T>>](#class-minheapt-extends-comparablet)
+        1. [Fields](#fields-3)
+        2. [Constructors](#constructors-7)
+        3. [Methods](#methods-10)
+    3. [Additional Note](#additional-note)
+
+## Algorithms
+
+9. [MergeSort](#mergesort)
+    1. [Description](#description-8)
+    2. [Class: MergeSort<T extends Comparable<T>>](#class-mergesortt-extends-comparablet)
+        1. [Constructors](#constructors-8)
+        2. [Methods](#methods-11)
+    3. [Time Complexity and Space Complexity](#time-complexity-and-space-complexity)
+
+10. [Dijkstra Algorithm](#dijkstra-algorithm)
+    1. [Description](#description-9)
+    2. [Class: DijkstraAlgorithm<T>](#class-dijkstraalgorithmt)
+        1. [Fields](#fields-4)
+        2. [Constructors](#constructors-9)
+        3. [Methods](#methods-12)
+    3. [Time Complexity and Space Complexity](#time-complexity-and-space-complexity-1)
+    4. [Efficiency](#efficiency)
+
+11. [A* Algorithm](#a-algorithm)
+    1. [Description](#description-10)
+    2. [Class: AStarAlgorithm<T>](#class-astar-algorithmt)
+        1. [Fields](#fields-5)
+        2. [Nested Class: Node<K>](#nested-class-nodek)
+        3. [Constructors](#constructors-10)
+        4. [Methods](#methods-13)
+    3. [Time Complexity and Space Complexity](#time-complexity-and-space-complexity-2)
+    4. [Efficiency](#efficiency-1)
+
+12. [Kruskal Algorithm](#kruskal-algorithm)
+    1. [Description](#description-11)
+    2. [Class: KruskalAlgorithm<T>](#class-kruskal-algorithmt)
+        1. [Nested Class: Edge<U>](#nested-class-edgeu)
+        2. [Constructors](#constructors-11)
+        3. [Methods](#methods-14)
+    3. [Time Complexity and Space Complexity](#time-complexity-and-space-complexity-3)
+    4. [Efficiency](#efficiency-2)
+
+13. [Linear Search (`SearchStationByNameLinear()`)](#linear-search-searchstationbynamelinear)
+    1. [Time Complexity and Space Complexity](#time-complexity-and-space-complexity-4)
+
+14. [Binary Search (`SearchStationByNameBinary()`)](#binary-search-searchstationbynamebinary)
+    1. [Time Complexity and Space Complexity](#time-complexity-and-space-complexity-5)
+
+## Additional Notes and Overall Summary:
+
+15. [Overall Note](#overall-note)
+    1. [Additional Note](#additional-note-1)
+
+--------------------------------------------------------------------------------------------------------------------------
 
 # DATA STRUCTURES:
 
@@ -236,8 +355,7 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 - Iterator implementation for the doubly linked list.
 
 ---------------------------------------------------------------------------------------------------------
-
-# MyGraph 
+# MyGraph
 
 ## Description:
 
@@ -347,16 +465,14 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 ### `class Edge<T>`
 
-- Edge between two vertices.
+- Represents an edge between two vertices.
 
 ## Internal Methods
 
 - Internal methods such as `addVertexIfNotExist`, `bfsForRectangle`, and `isStationInRectangle` are used for specific functionalities and are not intended for external use.
 
 ---------------------------------------------------------------------------------------------------------
-
-
-# AVLTree 
+# AVLTree
 
 ## Description:
 
@@ -367,7 +483,6 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 ### Constructors
 
 - `public AVLTree()`
-
     - Constructs a new AVL tree.
 
 ### Methods
@@ -395,7 +510,6 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 ### Inner Class: Node
 
 - `private class Node`
-
     - Represents a node in the AVL tree.
 
   #### Fields
@@ -429,7 +543,7 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 #### `private Node findMin(Node node)`
 
-- Finds the node with the minimum key value in the AVL tree.
+- Finds the node with the minimum key value in the AVL tree (helper method).
 
 #### `private int height(Node node)`
 
@@ -450,6 +564,12 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 #### `private Node rotateLeft(Node x)`
 
 - Performs a left rotation around the given node.
+
+## Additional Note:
+
+- The AVL tree ensures logarithmic height, providing efficient operations.
+- Time complexities: Insertion and removal - O(log N), Traversal - O(N).
+
 
 ---------------------------------------------------------------------------------------------------------
 
@@ -897,8 +1017,7 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 
 ---------------------------------------------------------------------------------------------------------------------------
-
-# A* Algorithm 
+# A* Algorithm
 
 ## Description:
 
@@ -961,7 +1080,6 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 ### Efficiency:
 
 - A* algorithm is efficient for finding the shortest paths in graphs with non-negative weights. It uses a combination of the actual cost from the start (gScore) and an estimated cost to the destination (heuristic) to guide the search efficiently.
-
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -1058,4 +1176,22 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 - The space complexity is constant for both algorithms as they use a fixed amount of memory regardless of the input size.
 - The binary search algorithm requires a sorted array, and the time complexity becomes significant when considering both sorting and searching.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+### Final Notes:
+
+- I really hope this documentation has been sufficient if not a bit excessive.
+- The Astar and Dijkstra algorithms sometimes come out with different paths. I discussed this with mister Frederik Bonte and he said thats fine because of the way the heuristic uses the Haversine formula.
+- This code used to provide a visual representation of the netherlands with the stations, but since i changed tha manager, it no longer works. The fragments of the previous Manager and Jframe class can be found in the "ForgottenClasses" directory.
+- Due to my job I did't get to finish this project in time so i did not get to submit it. I've had no notes or feedback to lead me for the retake. this is the first submission.
+
+
+- Finally i'd like to wish Happy Holidays to whoever is reading this :D
+
+
+
+
+
+
 

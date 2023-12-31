@@ -46,14 +46,8 @@ public class Station implements Comparable<Station> {
      */
     @Override
     public String toString() {
-        return "Station{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + nameMedium + '\'' +
-                ", uic='" + uic + '\'' +
-                ", latitude=" + geo_lat +
-                ", longitude=" + geo_lng +
-                "}\n";
+        return String.format("Station{id=%d, code='%s', name='%s', uic='%s', latitude=%.6f, longitude=%.6f}%n",
+                id, code, nameMedium, uic, geo_lat, geo_lng);
     }
 
     /**

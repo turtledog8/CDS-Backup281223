@@ -20,9 +20,10 @@ import java.util.Scanner;
 public class Manager2 {
     Scanner scanner = new Scanner(System.in);
 
-    private String stationsFilePath = "src/resources/stations.csv";
-    private String connectionsFilePath = "src/resources/tracks.csv";
-    private CSVReader2 csvReader = new CSVReader2();
+    ///MAKE SURE THE PATHS ARE FINE BC SRC/... DIDNT WORK ON YOUR HOME PC
+    private final String stationsFilePath = "CDS-Backup281223/src/resources/stations.csv";
+    private final String connectionsFilePath = "CDS-Backup281223/src/resources/tracks.csv";
+    private final CSVReader2 csvReader = new CSVReader2();
 
     private final ArrayList<Station> stationArrayList = csvReader.readStationsCSV(stationsFilePath);
     private final ArrayList<Connection> connectionArrayList = csvReader.readConnectionsCSV(connectionsFilePath);
@@ -96,9 +97,11 @@ public class Manager2 {
                 myGraph.connect(connection.getStationA(), connection.getStationB());
             }
 
-
+            //the menu has all of the requirements of the last presentation. Data valiadtion is done in the CSVReader class
 
             // NOTE TO TEACHER: I am not really sure what was meant by length i assumed it was the connection length which would mean the distance in this case.
+            //I did also consider stuff like name length but i think this is the most appropriate sort
+
             System.out.println("""
 
                     CDS Menu:
@@ -158,9 +161,9 @@ public class Manager2 {
 
     ////////////////////********************-- MENU METHODS --********************////////////////////
     private void SearchStationByNameLinear() {
-        scanner.nextLine(); // Consume the newline character left by nextInt()
+        scanner.nextLine();
 
-        System.out.print("Enter the name of the station to search: ");
+        System.out.print("Enter the name of the station: ");
         String searchName = scanner.nextLine().toLowerCase();
 
         boolean found = false;
@@ -178,12 +181,11 @@ public class Manager2 {
 
 
     private void SearchStationByNameBinary() {
-        System.out.print("Enter the name of the station to search: ");
+        System.out.print("Enter the name of the station: ");
         String searchName = scanner.next().toLowerCase();
 
         mergeSortStation.sort(allStations);
 
-        // Use the binarySearch object for searching
         int index = binarySearch(allStations, searchName);
 
         if (index != -1) {
@@ -197,23 +199,26 @@ public class Manager2 {
 
     private void MergeSortConnectionsLength() {
         mergeSort.sort(connectionsArray);
-        System.out.println(Arrays.toString(connectionsArray));
-        System.out.println();
-        System.out.println("↑↑↑ Tracks after merge sort ↑↑↑");
-    }
 
+        System.out.println("========================================");
+        System.out.println(" Tracks after merge sort ");
+        System.out.println(Arrays.toString(connectionsArray));
+        System.out.println("========================================\n");
+    }
 
     private void SelectionSortConnectionsLength() {
         selectionSort.sort(connectionsArray);
+
+        System.out.println("========================================");
+        System.out.println(" Tracks after selection sort ");
         System.out.println(Arrays.toString(connectionsArray));
-        System.out.println();
-        System.out.println("↑↑↑ Tracks after merge sort ↑↑↑");
+        System.out.println("========================================\n");
     }
+
     private void SearchStationUsingBinarySearchTree() {
         System.out.print("Enter part of the station name to search: ");
         String searchSubstring = scanner.next().toLowerCase();
 
-        // Perform search using binary search tree
         MyLinkedList<Station> matchingStations = binaryTree.searchBySubstring(searchSubstring);
 
         // Print the result
@@ -384,12 +389,41 @@ public class Manager2 {
         return resultList;
     }
 
+    ////////////////////********************-- JFRAME METHODS --********************////////////////////
 
+
+
+
+    public List<String> binarySearchStationByNameFormatted(String searchName) {
+        // Convert the search string to lowercase for case-insensitive search
+        searchName = searchName.toLowerCase();
+
+        // Sort the stations by name
+        mergeSortStation.sort(allStations);
+
+        // Perform binary search
+        int startIndex = binarySearch(allStations, searchName);
+
+        List<String> searchResult = new ArrayList<>();
+
+        // Collect matching stations
+        while (startIndex != -1 && startIndex < allStations.length &&
+                allStations[startIndex].getNameMedium().toLowerCase().contains(searchName)) {
+            searchResult.add(allStations[startIndex].toString());
+            startIndex++;
+        }
+
+        return searchResult;
+    }
+
+    public List<Station> getAllStationsList() {
+        return new ArrayList<>(Arrays.asList(allStations));
+    }
 
 ////////////////////********************-- HELPER METHODS --********************////////////////////
 
     // Updated binarySearch method to handle searching for a substring
-    private int binarySearch(Station[] list, String searchSubstring) {
+    protected int binarySearch(Station[] list, String searchSubstring) {
         int low = 0;
         int high = list.length - 1;
 
@@ -420,7 +454,7 @@ public class Manager2 {
         }
     }
 
-    private Station findStationByCode(String stationCode) {
+    protected Station findStationByCode(String stationCode) {
         for (Station station : stationArrayList) {
             if (station.getCode().equalsIgnoreCase(stationCode)) {
                 return station;
@@ -485,5 +519,7 @@ public class Manager2 {
         }
         return null;
     }
+
+
 
 }

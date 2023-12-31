@@ -1,3 +1,8 @@
+//These are the forgotten remnants of a previous iteration of the manager class
+
+
+
+
 //import AVLTree.AVLTree;
 //import dataStructures.graph.MyGraph;
 //import dataStructures.List.arraylsit.MyArrayList;
