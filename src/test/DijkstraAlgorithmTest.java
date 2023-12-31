@@ -1,7 +1,7 @@
 package test;
 
 import graph.MyGraph;
-import List.linkedlist.MyLinkedList;
+import list.linkedlist.MyLinkedList;
 import org.junit.jupiter.api.Test;
 import traversal.dijkstra.DijkstraAlgorithm;
 

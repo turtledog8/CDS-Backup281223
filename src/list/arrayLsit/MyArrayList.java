@@ -1,6 +1,6 @@
-package List.arraylsit;
+package list.arrayLsit;
 
-import List.List;
+import list.List;
 
 import java.util.ArrayList;
 

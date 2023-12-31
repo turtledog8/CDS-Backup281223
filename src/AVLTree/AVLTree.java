@@ -230,5 +230,83 @@ public class AVLTree<T extends Comparable<T>> {
         int balance = getBalance(node);
         return Math.abs(balance) <= 1 && isBalanced(node.left) && isBalanced(node.right);
     }
+    public boolean isEmpty() {
+        return root == null;
+    }
 
+    // Method to get the size of the tree
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + size(node.left) + size(node.right);
+    }
+
+    // Method to check if a key exists in the tree
+    public boolean contains(T key) {
+        return contains(root, key);
+    }
+
+    private boolean contains(Node node, T key) {
+        if (node == null) {
+            return false;
+        }
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            return contains(node.left, key);
+        } else if (cmp > 0) {
+            return contains(node.right, key);
+        } else {
+            return true; // Key found
+        }
+    }
+
+    // Method to retrieve the value associated with a key
+    public T get(T key) {
+        return get(root, key);
+    }
+
+    private T get(Node node, T key) {
+        if (node == null) {
+            return null; // Key not found
+        }
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            return get(node.left, key);
+        } else if (cmp > 0) {
+            return get(node.right, key);
+        } else {
+            return node.key; // Key found
+        }
+    }
+
+    // Method to generate the Graphviz representation of the AVL tree
+    public String graphViz() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph AVLTree {\n");
+        graphViz(root, sb);
+        sb.append("}\n");
+        return sb.toString();
+    }
+
+    private void graphViz(Node node, StringBuilder sb) {
+        if (node != null) {
+            if (node.left != null) {
+                sb.append("  \"").append(node.key).append("\" -> \"").append(node.left.key).append("\"\n");
+                graphViz(node.left, sb);
+            }
+            if (node.right != null) {
+                sb.append("  \"").append(node.key).append("\" -> \"").append(node.right.key).append("\"\n");
+                graphViz(node.right, sb);
+            }
+        }
+    }
 }

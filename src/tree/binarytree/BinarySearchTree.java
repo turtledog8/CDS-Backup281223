@@ -1,7 +1,7 @@
-package Tree.binarytree;
+package tree.binarytree;
 
-import List.linkedlist.MyLinkedList;
-import Model.Station;
+import list.linkedlist.MyLinkedList;
+import model.Station;
 
 public class BinarySearchTree<T extends Comparable<T>> {
 
@@ -169,5 +169,58 @@ public class BinarySearchTree<T extends Comparable<T>> {
             this.left = this.right = null;
         }
     }
+    /**
+     * Checks if the BST is empty.
+     *
+     * @return true if the BST is empty, false otherwise
+     */
+    public boolean isEmpty() {
+        return root == null;
+    }
 
+    /**
+     * Gets the number of nodes in the BST.
+     *
+     * @return the number of nodes in the BST
+     */
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node<T> node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + size(node.left) + size(node.right);
+    }
+
+    /**
+     * Gets the height of the BST.
+     *
+     * @return the height of the BST
+     */
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node<T> node) {
+        if (node == null) {
+            return 0;
+        }
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    /**
+     * Generates a string representation of the BST.
+     *
+     * @return a string representation of the BST
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        inOrderTraversalRecursive(root, data -> sb.append(data).append(" "));
+        return sb.toString().trim();
+    }
 }

@@ -1,4 +1,4 @@
-package Map;
+package map;
 
 /**
  * CustomMap interface represents a simple key-value mapping.

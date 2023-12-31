@@ -1,6 +1,6 @@
 package test;
 
-import List.arraylsit.MyArrayList;
+import list.arrayLsit.MyArrayList;
 import org.junit.Before;
 import org.junit.Test;
 

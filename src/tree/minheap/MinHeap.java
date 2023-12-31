@@ -1,4 +1,4 @@
-package Tree.minheap;
+package tree.minheap;
 
 import java.util.Comparator;
 
@@ -283,5 +283,22 @@ public class MinHeap<T extends Comparable<T>> {
         Object[] newArray = new Object[newSize];
         System.arraycopy(arr, 0, newArray, 0, size);
         arr = newArray;
+    }
+    /**
+     * Returns a string representation of the MinHeap.
+     *
+     * @return A string representing the elements of the MinHeap.
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            result.append(arr[i]);
+            if (i < size - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("]");
+        return result.toString();
     }
 }

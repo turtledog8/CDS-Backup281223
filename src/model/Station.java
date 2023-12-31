@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * The Station class represents a train station with various attributes.

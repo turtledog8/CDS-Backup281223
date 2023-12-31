@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * The Connection class represents a connection between two stations, including the distance between them.

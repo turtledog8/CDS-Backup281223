@@ -1,4 +1,4 @@
-package List;
+package list;
 
 /**
  * Interface for a double-linked list.

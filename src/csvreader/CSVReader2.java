@@ -1,7 +1,7 @@
 package csvreader;
 
-import Model.Connection;
-import Model.Station;
+import model.Connection;
+import model.Station;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

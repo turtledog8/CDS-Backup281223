@@ -1,7 +1,7 @@
 package traversal.dijkstra;
 
-import List.linkedlist.MyLinkedList;
-import Map.MyHashMap;
+import list.linkedlist.MyLinkedList;
+import map.MyHashMap;
 import graph.MyGraph;
 import traversal.GraphWeight;
 

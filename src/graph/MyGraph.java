@@ -1,8 +1,8 @@
 package graph;
 
-import List.linkedlist.MyLinkedList;
-import Model.Connection;
-import Model.Station;
+import list.linkedlist.MyLinkedList;
+import model.Connection;
+import model.Station;
 import traversal.GraphWeight;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package Map;
+package map;
 
 /**
  * Node class for a generic map, representing a key-value pair.

@@ -1,6 +1,6 @@
 package test;
 
-import Tree.binarytree.BinarySearchTree;
+import tree.binarytree.BinarySearchTree;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -207,5 +207,60 @@ public class BinarySearchTreeTest {
 
         assertEquals("3 7 10 12 15 18", getInOrderTraversal(tree));
     }
+    @Test
+    void isEmpty() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        assertTrue(tree.isEmpty());
 
+        tree.insert(10);
+        assertFalse(tree.isEmpty());
+
+        tree.delete(10);
+        assertTrue(tree.isEmpty());
+    }
+
+    @Test
+    void size() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        assertEquals(0, tree.size());
+
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(15);
+
+        assertEquals(3, tree.size());
+
+        tree.delete(5);
+
+        assertEquals(2, tree.size());
+    }
+
+    @Test
+    void height() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        assertEquals(0, tree.height());
+
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(15);
+
+        assertEquals(2, tree.height());
+
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(12);
+        tree.insert(18);
+
+        assertEquals(3, tree.height());
+    }
+
+    @Test
+    void toStringRepresentation() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(15);
+
+        assertEquals("5 10 15", tree.toString());
+    }
 }

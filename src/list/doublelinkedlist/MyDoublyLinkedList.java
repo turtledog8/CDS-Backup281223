@@ -1,6 +1,6 @@
-package List.doublelinkedlist;
+package list.doublelinkedlist;
 
-import List.List;
+import list.List;
 
 import java.util.Iterator;
 
@@ -273,4 +273,25 @@ public class MyDoublyLinkedList<E> implements List<E>, Iterable<E> {
             return data;
         }
     }
+
+    /**
+     * Generates a string representation of the doubly linked list.
+     *
+     * @return a string representation of the doubly linked list
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        Node<E> current = head;
+        while (current != null) {
+            result.append(current.getData());
+            if (current.getNext() != null) {
+                result.append(", ");
+            }
+            current = current.getNext();
+        }
+        result.append("]");
+        return result.toString();
+    }
+
 }

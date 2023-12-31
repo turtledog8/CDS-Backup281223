@@ -1,6 +1,6 @@
-package Map;
+package map;
 
-import List.linkedlist.MyLinkedList;
+import list.linkedlist.MyLinkedList;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -317,6 +317,31 @@ public class MyHashMap<K, V> implements CustomMap<K, V> {
         }
 
         return matchingValues;
+    }
+    /**
+     * Returns a string representation of the MyHashMap.
+     *
+     * @return a string representation of the MyHashMap
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("{");
+
+        for (MapNode<K, V> bucket : buckets) {
+            MapNode<K, V> current = bucket;
+            while (current != null) {
+                result.append(current.getKey()).append("=").append(current.getValue()).append(", ");
+                current = current.getNext();
+            }
+        }
+
+        // Remove the trailing comma and space if there are elements in the map
+        if (result.length() > 1) {
+            result.setLength(result.length() - 2);
+        }
+
+        result.append("}");
+        return result.toString();
     }
 
 }

@@ -1,8 +1,8 @@
 package test;
 
 import graph.MyGraph;
-import Model.Connection;
-import Model.Station;
+import model.Connection;
+import model.Station;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// 100%
+// i do not know which line I am missing from the test coverage my condolences.
 public class GraphTest {
     private MyGraph<Integer> graph;
 

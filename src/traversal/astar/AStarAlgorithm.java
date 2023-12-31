@@ -1,7 +1,7 @@
 package traversal.astar;
 
-import Map.MyHashMap;
-import Model.Station;
+import map.MyHashMap;
+import model.Station;
 import graph.MyGraph;
 import traversal.GraphWeight;
 

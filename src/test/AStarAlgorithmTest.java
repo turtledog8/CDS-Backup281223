@@ -1,6 +1,6 @@
 package test;
 
-import Model.Station;
+import model.Station;
 import graph.MyGraph;
 import org.junit.jupiter.api.Test;
 import traversal.astar.AStarAlgorithm;

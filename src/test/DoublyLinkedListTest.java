@@ -3,7 +3,7 @@ package test;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import List.doublelinkedlist.MyDoublyLinkedList;
+import list.doublelinkedlist.MyDoublyLinkedList;
 import org.junit.Before;
 import org.junit.Test;
 

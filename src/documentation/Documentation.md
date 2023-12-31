@@ -1,5 +1,6 @@
 # DOCUMENTATION FOR COMPLEX DATA STRUCTURES
-
+## Stoyan Hristozov 
+Student number: 527573
 --------------------------------------------------------------------------------------------------------------------------
 # Table of Contents
 
@@ -127,9 +128,12 @@
 
 # MyArrayList 
 
+## Location: 
+src/list/arrayLsit/MyArrayList.java
+
 ## Description:
 
-`MyArrayList` is an implementation of the `List` interface that utilizes an internal `ArrayList`. It provides a dynamic array-like data structure where elements can be added, removed, and accessed efficiently.
+`MyArrayList` is an implementation of the `list` interface that utilizes an internal `ArrayList`. It provides a dynamic array-like data structure where elements can be added, removed, and accessed efficiently.
 
 ## Constructors
 
@@ -198,9 +202,12 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 # MyLinkedList 
 
+## Location:
+src/list/linkedlist/MyLinkedList.java
+
 ## Description:
 
-`MyLinkedList` is an implementation of the `List` interface and `Iterable` interface, providing a linked list data structure. It allows for dynamic insertion, deletion, and retrieval of elements.
+`MyLinkedList` is an implementation of the `list` interface and `Iterable` interface, providing a linked list data structure. It allows for dynamic insertion, deletion, and retrieval of elements.
 
 ## Constructors
 
@@ -282,9 +289,12 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 # MyDoublyLinkedList 
 
+## Location:
+src/list/doublelinkedlist/MyDoublyLinkedList.java
+
 ## Description:
 
-`MyDoublyLinkedList` is an implementation of the `List` interface and `Iterable` interface, providing a doubly linked list data structure. It allows for dynamic insertion, deletion, and retrieval of elements with bidirectional traversal capabilities.
+`MyDoublyLinkedList` is an implementation of the `list` interface and `Iterable` interface, providing a doubly linked list data structure. It allows for dynamic insertion, deletion, and retrieval of elements with bidirectional traversal capabilities.
 
 ## Constructors
 
@@ -356,6 +366,9 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 ---------------------------------------------------------------------------------------------------------
 # MyGraph
+
+## Location:
+src/graph/MyGraph.java
 
 ## Description:
 
@@ -449,7 +462,7 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 - Gets the cost of the connection between two nodes.
 
-### `public List<T> BFS(T startVertex)`
+### `public list<T> BFS(T startVertex)`
 
 - Performs a breadth-first search starting from a given vertex.
 
@@ -457,7 +470,7 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 - Performs a depth-first search starting from a given vertex.
 
-### `public List<Station> findStationsInRectangle(double startLatitude, double startLongitude, double endLatitude, double endLongitude)`
+### `public list<Station> findStationsInRectangle(double startLatitude, double startLongitude, double endLatitude, double endLongitude)`
 
 - Performs a breadth-first search to find stations within a rectangle defined by GPS coordinates.
 
@@ -473,6 +486,9 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 ---------------------------------------------------------------------------------------------------------
 # AVLTree
+
+## Location:
+src/AVLTree/AVLTree.java
 
 ## Description:
 
@@ -506,6 +522,26 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 #### `public Node getRoot()`
 
 - Gets the root node of the AVL tree.
+
+#### `public boolean isEmpty()`
+
+- Checks if the AVL tree is empty.
+
+#### `public int size()`
+
+- Gets the size (number of nodes) of the AVL tree.
+
+#### `public boolean contains(T key)`
+
+- Checks if a key exists in the AVL tree.
+
+#### `public T get(T key)`
+
+- Retrieves the value associated with a key.
+
+#### `public String graphViz()`
+
+- Generates the Graphviz representation of the AVL tree.
 
 ### Inner Class: Node
 
@@ -570,10 +606,14 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 - The AVL tree ensures logarithmic height, providing efficient operations.
 - Time complexities: Insertion and removal - O(log N), Traversal - O(N).
 
-
 ---------------------------------------------------------------------------------------------------------
 
 # MyHashMap 
+
+
+## Location:
+src/map/MyHashMap.java
+
 
 ## Description:
 
@@ -693,8 +733,10 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# BinarySearchTree
 
-# BinarySearchTree 
+## Location:
+src/tree/binarytree/BinarySearchTree.java
 
 ## Description:
 
@@ -713,6 +755,22 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
     - Constructs a new empty `BinarySearchTree`.
 
 ### Methods
+
+#### `public boolean isEmpty()`
+
+- Checks if the BST is empty.
+
+#### `public int size()`
+
+- Gets the number of elements in the BST.
+
+#### `public int height()`
+
+- Gets the height of the BST.
+
+#### `public String toString()`
+
+- Gets a string representation of the BST.
 
 #### `public void insert(T value)`
 
@@ -786,6 +844,9 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 ---------------------------------------------------------------------------------------------------------------------------
 
 # MinHeap 
+
+## Location:
+src/tree/minheap/MinHeap.java
 
 ## Description:
 
@@ -902,8 +963,72 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 
 ---------------------------------------------------------------------------------------------------------------------------
+# ALGORITHMS
+All graphs have been created by me using Desmos. I've converted  the big O complexity into mathematical functions since I did not know where to make the graphs. Those will be all specified for further clarity
+
+I will justify this approach by saying that instead of making a graph with at least 5 data points, using a mathematical function to represent the complexities in the first quadrant of a coordinate system will give us a technically infinite amount of datapoints the further we go away from the (0 ; 0) coordinate (going right from the bottomleft corner).
+
+Since the coordinates have been provided I will defend this choice if I have to.
+
+---------------------------------------------------------------------------------------------------------------------------
+# SelectionSort
+
+## Location:
+`src/sorting/selectionsort/SelectionSort.java`
+
+## Description:
+
+`SelectionSort` is a generic implementation of the selection sort algorithm. It is an in-place comparison sorting algorithm that divides the input into a sorted and an unsorted region. The algorithm repeatedly selects the smallest (or largest) element from the unsorted region and swaps it with the first unsorted element.
+
+## Class: `SelectionSort<T extends Comparable<T>>`
+
+### Constructors
+
+- `public SelectionSort()`
+
+    - Constructs a new instance of `SelectionSort`.
+
+### Methods
+
+#### `public T[] sort(T[] array)`
+
+- Sorts the input array using the selection sort algorithm.
+
+    - **Parameters:**
+        - `array`: The array to be sorted.
+
+    - **Returns:**
+        - A sorted array.
+
+### Time Complexity: O(n^2)
+
+- The time complexity of the selection sort algorithm is O(n^2), where n is the number of elements in the array.
+
+### Space Complexity: O(1)
+
+- The space complexity of the selection sort algorithm is O(1) as it sorts the elements in-place.
+
+## Visualisation:
+![SelectionSort Complexity](SelectionSortComplexity.png)
+
+Functions:
+
+Time complexity: f(n) = n^2
+
+Space Complexity: g(n) = 1
+
+
+
+
+### Efficiency:
+
+- Selection sort is efficient for small datasets and is easy to implement. However, it has a higher time complexity compared to more advanced algorithms and is less suitable for large datasets.
+---------------------------------------------------------------------------------------------------------------------------
 
 # MergeSort 
+
+## Location:
+src/sorting/mergesort/MergeSort.java
 
 ## Description:
 
@@ -946,14 +1071,25 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 - The space complexity of the merge sort algorithm is O(n) due to the additional space required for merging two halves.
 
+## Visualisation:
+![Dijkstra Complexity](MergesortComplexity.png)
+
+Functions:
+
+Time complexity: f(n) = n * log(n)
+
+Space Complexity: g(n) = n
+
+
 ### Efficiency:
 
 - Merge sort is efficient for large datasets and provides stable sorting. It is particularly useful for linked lists and external sorting scenarios. However, it may have a higher space requirement compared to in-place sorting algorithms.
 
 ---------------------------------------------------------------------------------------------------------------------------
+# Dijkstra Algorithm
 
-
-# Dijkstra Algorithm 
+## Location:
+src/traversal/dijkstra/DijkstraAlgorithm.java
 
 ## Description:
 
@@ -1003,21 +1139,54 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 - Returns a string representation of distances from the source to each vertex.
 
-### Time Complexity: O((V + E) * log(V))
+## COMPLEXITY
+- The space and time complexities are specifically for the classes in the current program.
 
-- The time complexity of Dijkstra's algorithm depends on the number of vertices (V) and edges (E) in the graph. Using a priority queue for the vertex with the minimum distance results in a time complexity of O((V + E) * log(V)).
+## Time Complexity: O((V + E) * log(V))
 
-### Space Complexity: O(V + E)
+Priority Queue Operations:
 
-- The space complexity of Dijkstra's algorithm is O(V + E), where V is the number of vertices and E is the number of edges.
+- The time complexity is dominated by the operations on the priority queue, particularly the poll and add operations.
+- Each vertex is added and removed from the priority queue at most once, resulting in a total time complexity proportional to the number of vertices.
 
-### Efficiency:
+Relaxation of Neighbors:
+- The relaxation step, which involves updating distances and adding vertices to the priority queue, is executed for each edge at most once.
+- Therefore, the time complexity related to the relaxation step is proportional to the number of edges.
 
-- Dijkstra's algorithm is efficient for finding the shortest paths in graphs with non-negative weights. It uses a priority queue to efficiently select the vertex with the minimum distance at each step.
+### The overall time complexity is O((V + E) * log(V)), where V is the number of vertices and E is the number of edges.
+
+## Space Complexity: O(V + E)
+
+Vertices and Edges:
+
+- The space complexity is mainly influenced by the data structures used to store distances, previous vertices, settled vertices, and the priority queue.
+- The distances map stores distances from the source to each vertex, resulting in space proportional to the number of vertices.
+- The previousVertices map maintains the previous vertex in the shortest path, contributing to space proportional to the number of vertices.
+- The settled set keeps track of vertices that have been settled, contributing to space proportional to the number of vertices.
+- The priorityQueue uses extra space proportional to the number of vertices.
+
+### Therefore, the overall space complexity is O(V + E), where V is the number of vertices and E is the number of edges.
+
+## Visualisation:
+![Dijkstra Complexity](DijkstraAstarComplexity.png)
+
+Functions:
+Time complexity: f(V) = V * log(V)
+
+Space Complexity: g(V) = V
+
+## Efficiency and Justification:
+
+The Dijkstra algorithm is known for its efficiency in finding the shortest path in a weighted graph, when all edge weights are non-negative.
+The use of a priority queue ensures that the algorithm prioritizes vertices with the shortest known distance, optimizing the search process.
+The implementation avoids unnecessary relaxations by checking for settled vertices and negative edge weights.
 
 
 ---------------------------------------------------------------------------------------------------------------------------
 # A* Algorithm
+
+## Location:
+src/traversal/astar/AStarAlgorithm.java
 
 ## Description:
 
@@ -1050,7 +1219,7 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 ### Methods
 
-#### `public List<T> findShortestPath(T start, T goal)`
+#### `public list<T> findShortestPath(T start, T goal)`
 
 - Finds the shortest path in a weighted graph using the A* algorithm.
 
@@ -1061,7 +1230,7 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
     - **Returns:**
         - A list representing the shortest path from the start to the goal.
 
-#### `private List<T> reconstructPath(MyHashMap<T, T> cameFrom, T current)`
+#### `private list<T> reconstructPath(MyHashMap<T, T> cameFrom, T current)`
 
 - Reconstructs the path from the `cameFrom` map.
 
@@ -1069,21 +1238,60 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 - Calculates the heuristic cost (estimated cost) from the start to the goal using the Haversine formula.
 
-### Time Complexity: O((V + E) * log(V))
+## COMPLEXITY
+- The space and time complexities are specifically for the classes in the current program.
 
-- The time complexity of A* algorithm depends on the number of vertices (V) and edges (E) in the graph. Using a priority queue for the vertex with the minimum fScore results in a time complexity of O((V + E) * log(V)).
+## Time Complexity: O((V + E) * log(V))
 
-### Space Complexity: O(V + E)
+**Priority Queue Operations:**
+- The time complexity is dominated by the operations on the priority queue, particularly the poll and add operations.
+- Each vertex is added and removed from the priority queue at most once, resulting in a total time complexity proportional to the number of vertices.
 
-- The space complexity of A* algorithm is O(V + E), where V is the number of vertices and E is the number of edges.
+**Relaxation of Neighbors:**
+- The relaxation step, which involves updating scores and adding vertices to the priority queue, is executed for each edge at most once.
+- Therefore, the time complexity related to the relaxation step is proportional to the number of edges.
 
-### Efficiency:
+### The overall time complexity is O((V + E) * log(V)), where V is the number of vertices and E is the number of edges.
 
-- A* algorithm is efficient for finding the shortest paths in graphs with non-negative weights. It uses a combination of the actual cost from the start (gScore) and an estimated cost to the destination (heuristic) to guide the search efficiently.
+## Space Complexity: O(V + E)
+
+**Vertices and Edges:**
+- The space complexity is mainly influenced by the data structures used to store gScores, fScores, the priority queue, and the 'cameFrom' map.
+- The gScores map stores the cost from the start to each vertex, resulting in space proportional to the number of vertices.
+- The fScores map maintains the combined cost (gScore + heuristic cost) to each vertex, contributing to space proportional to the number of vertices.
+- The 'cameFrom' map keeps track of the previous vertices, contributing to space proportional to the number of vertices.
+- The priority queue uses extra space proportional to the number of vertices.
+
+### Therefore, the overall space complexity is O(V + E), where V is the number of vertices and E is the number of edges.
+
+## Visualisation:
+![Astar Complexity](DijkstraAstarComplexity.png)
+
+Functions:
+Time complexity: h(V) = V * log(V)
+
+Space Complexity: i(V) = V
+
+
+## Efficiency and Justification:
+
+The A* algorithm is known for its efficiency in finding the shortest path in a weighted graph by incorporating a heuristic (estimated cost) to guide the search efficiently. The priority queue ensures that the algorithm prioritizes vertices with the lowest estimated cost, optimizing the search process.
+
+The implementation avoids unnecessary exploration of paths by considering the estimated total cost and updating the path only when a lower-cost path is found. The heuristic function, based on the Haversine formula, is used to estimate the cost from the current vertex to the goal.
+
+The algorithm is efficient for graphs with non-negative weights and provides a balance between completeness and optimality. The heuristic helps guide the search towards the goal while the cost function ensures that the path taken is the most efficient.
+
+It is VERY VERY IMPORTANT to note that when A* algorithm is used without a well-informed heuristic (i.e., when the heuristic is effectively zero or does not provide any useful information), it essentially behaves like Dijkstra's algorithm. In such cases, A* degenerates to the behavior of Dijkstra's algorithm because the heuristic term becomes irrelevant, and the algorithm relies solely on the actual cost from the start to the current node.
+
+The strength of A* lies in its ability to efficiently explore the search space by prioritizing nodes that are expected to lead to the goal more quickly, thanks to the heuristic function. Without a meaningful heuristic, A* loses this advantage, and its performance converges towards that of Dijkstra's algorithm, which explores nodes in a uniform-cost manner without considering any estimated costs.
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 
 # Kruskal Algorithm 
+
+## Location:
+src/traversal/kruskal/KruskalAlgorithm.java
 
 ## Description:
 
@@ -1112,7 +1320,7 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 ### Methods
 
-#### `public List<Edge<T>> findMinimumSpanningTree(MyGraph<T> graph)`
+#### `public list<Edge<T>> findMinimumSpanningTree(MyGraph<T> graph)`
 
 - Finds the minimum spanning tree of a connected, undirected graph using Kruskal's algorithm.
 
@@ -1132,20 +1340,53 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
     - **Returns:**
         - `true` if the graph contains edges with negative weights, `false` otherwise.
 
-### Time Complexity: O(E * log(V))
+## Time Complexity: O(E * log(V))
 
-- The time complexity of Kruskal's algorithm is dominated by the sorting of edges, which takes O(E * log(E)) time. In a connected graph, E is at most O(V^2), so the time complexity is O(E * log(V)).
+**Sorting Edges:**
+- The time complexity is dominated by the sorting of edges, which is performed once at the beginning.
+- Sorting is done based on the weights of the edges, and the overall time complexity is O(E * log(V)), where E is the number of edges and V is the number of vertices.
 
-### Space Complexity: O(V + E)
+**Disjoint Set Operations:**
+- The time complexity for disjoint set operations (find and union) is nearly linear, as each operation involves traversing a path in the disjoint set forest.
+- The overall time complexity for disjoint set operations is approximately O(V).
 
-- The space complexity of Kruskal's algorithm is O(V + E), where V is the number of vertices and E is the number of edges.
+### The overall time complexity is O(E * log(V)), where E is the number of edges and V is the number of vertices.
 
-### Efficiency:
+## Space Complexity: O(V)
 
-- Kruskal's algorithm is efficient for finding the minimum spanning tree in connected graphs with non-negative weights. It prioritizes the smallest edges while avoiding cycles, resulting in a tree that spans all vertices with the minimum total edge weight.
+**Edges and Disjoint Set:**
+- The space complexity is primarily influenced by the storage of edges and the disjoint set data structure.
+- The edgeQueue stores all edges, contributing to space proportional to the number of edges.
+- The disjoint set maintains parent information for each vertex, contributing to space proportional to the number of vertices.
+
+### Therefore, the overall space complexity is O(V), where V is the number of vertices.
+
+## Visualisation:
+![Kruskal Complexity](KruskalComplexity.png)
+
+Functions:
+
+Time complexity: j(V) = E * log(V)
+
+
+Space Complexity: k(V) = V
+
+
+## Efficiency and Justification:
+
+The Kruskal algorithm is known for its efficiency in finding the minimum spanning tree of a graph. It operates by sorting edges based on their weights and incrementally adding edges to the minimum spanning tree while avoiding cycles.
+
+The use of a priority queue ensures that edges are processed in ascending order of weight, optimizing the search for the minimum spanning tree. The algorithm employs the disjoint set data structure to efficiently check and avoid cycles during edge addition.
+
+The implementation handles negative weights, throwing an exception if the graph contains negative weights or cycles, ensuring the algorithm's correctness under specific conditions. The union-by-rank and path compression strategies in the disjoint set help maintain efficiency during find and union operations.
+
+Kruskal's algorithm provides a balance between simplicity and efficiency for finding minimum spanning trees in graphs.
 
 
 ---------------------------------------------------------------------------------------------------------------------------
+
+## Location: 
+src/Manager2.java
 
 ## Linear Search (`SearchStationByNameLinear()`)
 
@@ -1179,15 +1420,1136 @@ The space complexity of `MyArrayList` is primarily determined by the internal `A
 
 ---------------------------------------------------------------------------------------------------------------------------
 
+# Tests and Validation
+# Tests and Validation
+
+## ArrayListTest
+
+### Location:
+`src/test/ArrayListTest.java`
+
+### Description:
+This test class validates the functionality of the `MyArrayList` implementation, ensuring that it meets the specified requirements.
+
+### Test Methods:
+
+#### `testAddAndGet()`
+- **Description:** Tests the `add` method and validates the correctness of the `get` method.
+- **Test Steps:**
+    1. Add "Element 1" to the list.
+    2. Add "Element 2" to the list.
+    3. Validate that `get(0)` returns "Element 1".
+    4. Validate that `get(1)` returns "Element 2".
+- **Expected Result:** The elements are added to the list, and the `get` method retrieves the correct values.
+
+#### `testAddAtSpecificIndex()`
+- **Description:** Tests the `add` method at a specific index and validates the correctness of the operation.
+- **Test Steps:**
+    1. Add "Element 1" to the list.
+    2. Add "Element 2" to the list.
+    3. Add "Element 3" at index 1.
+    4. Validate that `get(0)` returns "Element 1".
+    5. Validate that `get(1)` returns "Element 3".
+    6. Validate that `get(2)` returns "Element 2".
+- **Expected Result:** The element is added at the specified index, and the other elements are shifted accordingly.
+
+#### `testRemove()`
+- **Description:** Tests the `remove` method and validates the correctness of the operation.
+- **Test Steps:**
+    1. Add "Element 1" to the list.
+    2. Add "Element 2" to the list.
+    3. Remove "Element 1".
+    4. Validate that `get(0)` returns "Element 2".
+    5. Validate that the size is 1.
+- **Expected Result:** The specified element is removed, and the size is updated accordingly.
+
+#### `testRemoveAtIndex()`
+- **Description:** Tests the `remove` method at a specific index and validates the correctness of the operation.
+- **Test Steps:**
+    1. Add "Element 1" to the list.
+    2. Add "Element 2" to the list.
+    3. Remove element at index 0.
+    4. Validate that `get(0)` returns "Element 2".
+    5. Validate that the size is 1.
+- **Expected Result:** The element at the specified index is removed, and the size is updated accordingly.
+
+#### `testContains()`
+- **Description:** Tests the `contains` method and validates its correctness.
+- **Test Steps:**
+    1. Add "Element 1" to the list.
+    2. Add "Element 2" to the list.
+    3. Check if the list contains "Element 1".
+    4. Check if the list contains "Element 3".
+- **Expected Result:** The method correctly identifies the presence or absence of elements in the list.
+
+#### `testSize()`
+- **Description:** Tests the `size` method and validates its correctness.
+- **Test Steps:**
+    1. Add "Element 1" to the list.
+    2. Add "Element 2" to the list.
+    3. Check the size of the list.
+- **Expected Result:** The size of the list is correctly reported.
+
+#### `testIsEmpty()`
+- **Description:** Tests the `isEmpty` method and validates its correctness.
+- **Test Steps:**
+    1. Check if the list is initially empty.
+    2. Add "Element 1" to the list.
+    3. Check if the list is empty after adding an element.
+- **Expected Result:** The method correctly identifies whether the list is empty.
+
+#### `testClear()`
+- **Description:** Tests the `clear` method and validates its correctness.
+- **Test Steps:**
+    1. Add "Element 1" to the list.
+    2. Add "Element 2" to the list.
+    3. Clear the list.
+    4. Check if the list is empty after clearing.
+- **Expected Result:** The list is cleared, and it becomes empty.
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+## AStarAlgorithmTest
+
+### Location:
+`src/test/AStarAlgorithmTest.java`
+
+### Description:
+This test class validates the functionality of the `AStarAlgorithm` class, which is responsible for finding the shortest path in a graph using the A* algorithm. The tests cover various scenarios, including finding paths in different graph structures and handling edge cases.
+
+### Test Methods:
+
+#### `findShortestPath_should_Return_Shortest_Path()`
+- **Description:** Tests the `findShortestPath` method for a simple graph.
+- **Test Steps:**
+    1. Create a sample graph with stations and edges.
+    2. Find the shortest path from Station A to Station D.
+    3. Validate that the actual path matches the expected path.
+- **Expected Result:** The A* algorithm correctly finds the shortest path.
+
+#### `findShortestPath_given_a_complex_path()`
+- **Description:** Tests the `findShortestPath` method for a more complex graph.
+- **Test Steps:**
+    1. Create a sample graph with stations and edges.
+    2. Find the shortest path from Station A to Station I.
+    3. Validate that the actual path matches the expected path.
+- **Expected Result:** The A* algorithm correctly finds the shortest path in a complex graph.
+
+#### `findShortestPath_noPathFound_shouldReturnEmptyList()`
+- **Description:** Tests the case where there is no path between two nodes.
+- **Test Steps:**
+    1. Create a sample graph with two disconnected nodes.
+    2. Find the shortest path between the nodes.
+    3. Validate that the returned path is empty.
+- **Expected Result:** The method returns an empty list when no path is found.
+
+#### `getSteps_shouldReturnSteps()`
+- **Description:** Tests the `getSteps` method.
+- **Test Steps:**
+    1. Create a sample graph with stations and edges.
+    2. Find the shortest path from Station A to Station D.
+    3. Retrieve the steps taken during the algorithm.
+    4. Validate that the steps match the shortest path.
+- **Expected Result:** The method returns the correct steps taken during the A* algorithm.
+
+#### `findShortestPath_startEqualsGoal_shouldReturnSingletonList()`
+- **Description:** Tests the case where the start node equals the goal node.
+- **Test Steps:**
+    1. Create a sample graph with a single node.
+    2. Find the shortest path from the node to itself.
+    3. Validate that the returned path is a singleton list.
+- **Expected Result:** The method returns a singleton list when the start equals the goal.
+
+#### `findShortestPath_unreachableGoal_shouldReturnEmptyList()`
+- **Description:** Tests the case where the goal node is unreachable.
+- **Test Steps:**
+    1. Create a sample graph with two disconnected nodes.
+    2. Find the shortest path between the nodes.
+    3. Validate that the returned path is empty.
+- **Expected Result:** The method returns an empty list when the goal node is unreachable.
+
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+
+# AVLTreeTest
+
+## Test Methods
+
+### `testInsertAndInOrderTraversal`
+- **Description:** Tests the `insert` method and verifies the in-order traversal.
+- **Test Steps:**
+    1. Insert elements 10, 20, and 30 into the AVL tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result matches the expected list [10, 20, 30].
+
+### `testInsertDuplicateKey`
+- **Description:** Tests the `insert` method with a duplicate key and verifies the in-order traversal.
+- **Test Steps:**
+    1. Insert element 10 twice into the AVL tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result matches the expected list [10].
+
+### `testInsertAndBalance`
+- **Description:** Tests the `insert` method and checks if the tree is balanced.
+- **Test Steps:**
+    1. Insert elements 30, 20, 40, 10, and 25 into the AVL tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result matches the expected list [10, 20, 25, 30, 40].
+    4. Check if the tree is balanced.
+
+### `testInsertAndBalanceWithRotation`
+- **Description:** Tests the `insert` method and checks if the tree is balanced with rotations.
+- **Test Steps:**
+    1. Insert elements 30, 20, 40, 10, 25, and 35 into the AVL tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result matches the expected list [10, 20, 25, 30, 35, 40].
+    4. Check if the tree is balanced.
+
+### `testRemoveAndInOrderTraversal`
+- **Description:** Tests the `remove` method and verifies the in-order traversal.
+- **Test Steps:**
+    1. Insert elements 30, 20, 40, 10, 25, and 35 into the AVL tree.
+    2. Remove element 25.
+    3. Perform an in-order traversal.
+    4. Verify that the traversal result matches the expected list [10, 20, 30, 35, 40].
+
+### `testInsertAndInOrderTraversalString`
+- **Description:** Tests the `insert` method with String elements and verifies the in-order traversal.
+- **Test Steps:**
+    1. Insert "apple," "banana," and "orange" into the AVL tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result matches the expected list ["apple", "banana", "orange"].
+
+### `testHeightBalance`
+- **Description:** Tests the `isBalanced` method.
+- **Test Steps:**
+    1. Insert elements 30, 20, 40, 10, 25, and 35 into the AVL tree.
+    2. Check if the tree is balanced.
+    3. Verify that the result is true.
+
+### `testEmptyTreeRemove`
+- **Description:** Tests the `remove` method on an empty tree.
+- **Test Steps:**
+    1. Attempt to remove a key from an empty tree.
+    2. Verify that no exception is thrown, and the tree remains empty.
+
+### `testRemoveNonExistentKey`
+- **Description:** Tests the `remove` method with a non-existent key.
+- **Test Steps:**
+    1. Insert elements 10 and 20 into the AVL tree.
+    2. Attempt to remove key 5.
+    3. Verify that no exception is thrown, and the tree remains unchanged.
+
+### `testMultipleDuplicates`
+- **Description:** Tests inserting and removing nodes with multiple duplicates of the same key.
+- **Test Steps:**
+    1. Insert elements 10, 20, and 30 into the AVL tree.
+    2. Remove one occurrence of key 10.
+    3. Verify that two occurrences of key 10 remain.
+
+### `testMixedTypes`
+- **Description:** Tests inserting keys of different types.
+- **Test Steps:**
+    1. Insert Double elements 10.0, 15.5, and 20.0 into the AVL tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result matches the expected list [10.0, 15.5, 20.0].
+
+### `testLargeDataset`
+- **Description:** Tests the performance and correctness with a larger dataset.
+- **Test Steps:**
+    1. Insert integers from 1 to 1000 into the AVL tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result matches the expected list of integers from 1 to 1000.
+
+### `testRandomInsertionsAndDeletions`
+- **Description:** Conducts tests where keys are inserted and removed in a random order.
+- **Test Steps:**
+    - Implement test logic to insert and remove keys randomly.
+
+### `testEmptyTreeInOrderTraversal`
+- **Description:** Tests `inOrderTraversal` on an empty tree.
+- **Test Steps:**
+    1. Perform an in-order traversal on an empty tree.
+    2. Verify that the traversal result is empty.
+
+### `testEmptyTreeIsBalanced`
+- **Description:** Tests the behavior of `isBalanced` method on an empty tree.
+- **Test Steps:**
+    1. Check if an empty tree is balanced.
+    2. Verify that the result is true.
+
+### `testIsEmpty`
+- **Description:** Tests the `isEmpty` method.
+- **Test Steps:**
+    1. Check if an empty tree is empty.
+    2. Insert an element and check if the tree is no longer empty.
+
+### `testSize`
+- **Description:** Tests the `size` method.
+- **Test Steps:**
+    1. Check the size of an empty tree.
+    2. Insert elements and verify that the size is updated accordingly.
+
+### `testContains`
+- **Description:** Tests the `contains` method.
+- **Test Steps:**
+    1. Check if the tree contains a key that has not been inserted.
+    2. Insert elements and verify that the tree correctly reports the presence of inserted keys.
+
+### `testGet`
+- **Description:** Tests the `get` method.
+- **Test Steps:**
+    1. Check if the tree returns null for a key that has not been inserted.
+    2. Insert elements and verify that the tree correctly returns values for inserted keys.
+
+### `testGraphViz`
+- **Description:** Tests the `graphViz` method.
+- **Test Steps:**
+    1. Create an AVL tree and check the graphviz representation.
+    2. Insert elements and verify that the graphviz representation is updated accordingly.
+
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+
+# BinarySearchTreeTest Documentation
+
+## Test Methods
+
+### `insertAndSearch`
+- **Description:** Tests the `insert` and `search` methods.
+- **Test Steps:**
+    1. Insert elements 10, 5, and 15 into the binary search tree.
+    2. Verify that searching for elements 10, 5, 15 returns true, and searching for 7 returns false.
+
+### `insertAndDelete`
+- **Description:** Tests the `insert` and `delete` methods.
+- **Test Steps:**
+    1. Insert elements 10, 5, and 15 into the binary search tree.
+    2. Delete element 5.
+    3. Verify that searching for elements 10 and 15 returns true, and searching for 5 returns false.
+
+### `insertNull`, `searchNull`, `deleteNull`
+- **Description:** Tests the behavior of inserting, searching, and deleting with null values.
+- **Test Steps:**
+    - For each test, attempt to perform the corresponding operation with a null value.
+    - Verify that an `IllegalArgumentException` is thrown.
+
+### `deleteNonexistentValue`
+- **Description:** Tests the `delete` method with a non-existent value.
+- **Test Steps:**
+    1. Insert elements 10, 5, and 15 into the binary search tree.
+    2. Attempt to delete value 7.
+    3. Verify that an `IllegalArgumentException` is thrown.
+
+### `inOrderTraversal`
+- **Description:** Tests the `inOrderTraversal` method.
+- **Test Steps:**
+    1. Insert elements 10, 5, and 15 into the binary search tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result is "5 10 15".
+
+### `getInOrderTraversal`
+- **Description:** Tests the `getInOrderTraversal` helper method.
+- **Test Steps:**
+    1. Create a binary search tree and perform in-order traversal using the helper method.
+    2. Verify that the traversal result matches the expected order.
+
+### `insertAndDeleteEdgeCases`
+- **Description:** Tests edge cases of inserting and deleting.
+- **Test Steps:**
+    1. Insert element 10 into an empty tree.
+    2. Verify that searching for element 10 returns true.
+    3. Delete the only node in the tree.
+    4. Verify that searching for element 10 returns false.
+
+### `inOrderTraversalComplex`
+- **Description:** Tests the `inOrderTraversal` method with a complex tree.
+- **Test Steps:**
+    1. Insert elements 10, 5, 15, 3, 7, 12, and 18 into the binary search tree.
+    2. Perform an in-order traversal.
+    3. Verify that the traversal result is "3 5 7 10 12 15 18".
+
+### `insertDuplicate`
+- **Description:** Tests inserting a duplicate value.
+- **Test Steps:**
+    1. Insert element 10 into the binary search tree.
+    2. Attempt to insert the same element again.
+    3. Verify that an `IllegalArgumentException` is thrown.
+
+### `deleteNodeWithTwoChildren`
+- **Description:** Tests deleting a node with two children.
+- **Test Steps:**
+    1. Insert elements 10, 5, 15, 3, 7, 12, and 18 into the binary search tree.
+    2. Delete element 15.
+    3. Verify that searching for element 15 returns false, and perform an in-order traversal.
+
+### `insertAndDeleteMultiple`
+- **Description:** Tests inserting and deleting multiple elements.
+- **Test Steps:**
+    1. Insert elements 10, 5, 15, 3, 7, 12, and 18 into the binary search tree.
+    2. Delete elements 5, 15, and 7.
+    3. Verify that searching for these elements returns false, and perform an in-order traversal.
+
+### `inOrderTraversalDynamic`
+- **Description:** Tests in-order traversal on a dynamically changing tree.
+- **Test Steps:**
+    1. Insert a large number of elements (1 to 10000) into the binary search tree.
+    2. Search for and delete elements in a dynamic manner.
+    3. Verify that the in-order traversal matches the expected order.
+
+### `inOrderTraversalAfterDeletion`
+- **Description:** Tests in-order traversal after deleting a node.
+- **Test Steps:**
+    1. Insert elements 10, 5, 15, 3, 7, 12, and 18 into the binary search tree.
+    2. Delete element 5.
+    3. Verify that the in-order traversal is "3 7 10 12 15 18".
+
+### `isEmpty`
+- **Description:** Tests the `isEmpty` method.
+- **Test Steps:**
+    - Insert an element and delete it.
+    - Verify that the tree is empty after deletion.
+
+### `size`
+- **Description:** Tests the `size` method.
+- **Test Steps:**
+    - Insert and delete elements and verify that the size is updated accordingly.
+
+### `height`
+- **Description:** Tests the `height` method.
+- **Test Steps:**
+    - Insert elements into the tree and verify the height.
+
+### `toStringRepresentation`
+- **Description:** Tests the `toString` method.
+- **Test Steps:**
+    1. Insert elements 10, 5, and 15 into the binary search tree.
+    2. Verify that the string representation is "5 10 15".
+
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+# DijkstraAlgorithmTest 
+
+## Test Methods
+
+### `findShortestPath_basicScenario`
+- **Description:** Tests the `findShortestPath` method in a basic scenario.
+- **Test Steps:**
+    1. Create a graph with edges A-B (weight: 1.0) and A-C (weight: 100.0).
+    2. Find the shortest path from A to D.
+    3. Verify that the actual path matches the expected path "[A, B, D]".
+
+### `findShortestPath_given_a_complex_path`
+- **Description:** Tests the `findShortestPath` method with a complex graph.
+- **Test Steps:**
+    1. Create a graph with multiple edges and nodes.
+    2. Find the shortest path from A to I.
+    3. Verify that the actual path matches the expected path "[A, C, E, G, I]".
+
+### `findShortestPath_negativeWeights`
+- **Description:** Tests the `findShortestPath` method with negative weights.
+- **Test Steps:**
+    - Create a graph with an edge having a negative weight.
+    - Verify that an `IllegalArgumentException` is thrown.
+
+### `findShortestPath_disconnectedGraph`
+- **Description:** Tests the `findShortestPath` method with a disconnected graph.
+- **Test Steps:**
+    1. Create a graph with disconnected components.
+    2. Find the shortest path from A to D.
+    3. Verify that the path is empty.
+
+### `findShortestPath_unreachableDestination`
+- **Description:** Tests the `findShortestPath` method with an unreachable destination.
+- **Test Steps:**
+    1. Create a graph with two disconnected components.
+    2. Find the shortest path from A to D.
+    3. Verify that the path is empty.
+
+### `findShortestPath_equalSourceAndDestination`
+- **Description:** Tests the `findShortestPath` method with equal source and destination.
+- **Test Steps:**
+    1. Create a graph with an edge from A to B.
+    2. Find the shortest path from A to A.
+    3. Verify that the path contains only the source vertex.
+
+### `findShortestPath_graphWithLoops`
+- **Description:** Tests the `findShortestPath` method with a graph containing loops.
+- **Test Steps:**
+    1. Create a graph with a loop (A-B, B-A).
+    2. Find the shortest path from A to B.
+    3. Verify that the actual path matches the expected path "[A, B]".
+
+### `findShortestPath_graphWithDuplicateEdges`
+- **Description:** Tests the `findShortestPath` method with a graph containing duplicate edges.
+- **Test Steps:**
+    1. Create a graph with duplicate edges between A and B.
+    2. Find the shortest path from A to B.
+    3. Verify that the actual path matches the expected path "[A, B]".
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+# DoublyLinkedListTest Documentation
+
+## Test Methods
+
+### `testAddAndGet`
+- **Description:** Tests the `add` and `get` methods of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Retrieve elements at specific indices.
+    3. Verify that the retrieved elements match the expected values.
+
+### `testAddAtSpecificIndex`
+- **Description:** Tests the `add` method at a specific index of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Add an element at a specific index.
+    3. Verify that the elements are added correctly.
+
+### `testRemove`
+- **Description:** Tests the `remove` method of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Remove one element.
+    3. Verify that the element is removed, and the size is updated.
+
+### `testRemoveAtIndex`
+- **Description:** Tests the `remove` method at a specific index of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Remove an element at a specific index.
+    3. Verify that the element is removed, and the size is updated.
+
+### `testContains`
+- **Description:** Tests the `contains` method of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Check for the existence of elements.
+    3. Verify that the method returns the expected results.
+
+### `testSize`
+- **Description:** Tests the `size` method of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Verify that the size is correctly calculated.
+
+### `testIsEmpty`
+- **Description:** Tests the `isEmpty` method of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Verify that the list is initially empty.
+    2. Add an element and check if the list is no longer empty.
+
+### `testClear`
+- **Description:** Tests the `clear` method of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Clear the list.
+    3. Verify that the list is empty.
+
+### `testIterator`
+- **Description:** Tests the iterator of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Iterate over the elements using an iterator.
+    3. Verify that the iterator returns the expected elements.
+
+### `testRemoveFromEmptyList`
+- **Description:** Tests the `remove` method from an empty list.
+- **Test Steps:**
+    - Verify that attempting to remove an element from an empty list throws an `IndexOutOfBoundsException`.
+
+### `testGetOutOfBounds`
+- **Description:** Tests the `get` method with an out-of-bounds index.
+- **Test Steps:**
+    1. Add one element to the list.
+    2. Verify that attempting to get an element with an out-of-bounds index throws an `IndexOutOfBoundsException`.
+
+### `testRemoveNonExistingElement`
+- **Description:** Tests removing a non-existing element from `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add one element to the list.
+    2. Verify that attempting to remove a non-existing element does not throw an exception.
+
+### `stressTest`
+- **Description:** Tests the performance of `MyDoublyLinkedList` by adding a large number of elements.
+- **Test Steps:**
+    - Add 100,000 elements to the list.
+    - Verify that the size is correct.
+
+### `testAddAtBeginningAndEnd`
+- **Description:** Tests adding elements at the beginning and end of `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add one element to the list.
+    2. Add a new element at the beginning and end.
+    3. Verify that the elements are added correctly.
+
+### `testConcurrentModification`
+- **Description:** Tests concurrent modification by using an iterator while modifying the list.
+- **Test Steps:**
+    1. Add two elements to the list.
+    2. Create an iterator and verify it works.
+    3. Add a new element to the list.
+    4. Verify that the iterator still works.
+
+### `testRandomElementRemoval`
+- **Description:** Tests randomly removing elements from `MyDoublyLinkedList`.
+- **Test Steps:**
+    1. Add 1,000 elements to the list.
+    2. Remove 500 elements randomly.
+    3. Verify that the size is correct.
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+
+# GraphTest Documentation
+
+## Test Methods
+
+### `default_Constructor_Makes_Undirected_Unweighted_Graph`
+- **Description:** Tests the default constructor of `MyGraph`, ensuring it creates an undirected, unweighted graph.
+- **Test Steps:**
+    - Verify that the graph is not directed and not weighted.
+
+### `custom_Constructor_Returns_Inputted_Details`
+- **Description:** Tests the custom constructor of `MyGraph`.
+- **Test Steps:**
+    1. Create a directed graph and verify its properties.
+    2. Create a weighted graph and verify its properties.
+    3. Create a directed weighted graph and verify its properties.
+
+### `isEmpty_Returns_True_On_Creation`
+- **Description:** Tests the `isEmpty` method on an empty graph.
+- **Test Steps:**
+    - Verify that the graph is initially empty.
+
+### `isEmpty_Returns_False_On_Non_Empty_Graph`
+- **Description:** Tests the `isEmpty` method on a non-empty graph.
+- **Test Steps:**
+    1. Add a vertex to the graph.
+    2. Verify that the graph is no longer empty.
+
+### `connect_Adds_Values`
+- **Description:** Tests the `connect` method, ensuring it adds vertices to the graph.
+- **Test Steps:**
+    1. Verify that the graph does not contain vertices initially.
+    2. Connect two vertices.
+    3. Verify that both vertices are now in the graph.
+
+### `addVertex_Increases_Vertex_Count`
+- **Description:** Tests the `addVertex` method and its impact on the vertex count.
+- **Test Steps:**
+    1. Verify that the vertex count is initially 0.
+    2. Add a vertex.
+    3. Verify that the vertex count increases.
+
+### `creatingVertex_In_Undirected_Graph_Without_Connecting_Are_Unconnected`
+- **Description:** Tests vertex connection behavior in an undirected graph.
+- **Test Steps:**
+    1. Verify that vertices are initially unconnected.
+    2. Connect vertices in various ways.
+    3. Verify the connectivity status between vertices.
+
+### `connectedVertexes_In_Directed_Graph_Go_One_Way`
+- **Description:** Tests vertex connection behavior in a directed graph.
+- **Test Steps:**
+    1. Create a directed graph and connect vertices.
+    2. Verify the connectivity status between vertices in the directed graph.
+
+### `getVertex_Count_Returns_Amount_Of_Vertexes`
+- **Description:** Tests the `getVertexCount` method.
+- **Test Steps:**
+    1. Verify that the vertex count is initially 0.
+    2. Connect vertices.
+    3. Verify that the vertex count reflects the correct number of vertices.
+
+### `getWeight_Returns_Inputted_Weight`
+- **Description:** Tests the `getWeight` method in a weighted graph.
+- **Test Steps:**
+    - Add a weighted connection and verify the returned weight.
+
+### `getNeighbours_Returns_Neighbours`
+- **Description:** Tests the `getNeighbours` method.
+- **Test Steps:**
+    1. Connect vertices.
+    2. Retrieve neighbors for a vertex.
+    3. Verify the correctness of the retrieved neighbors.
+
+### `getWeight_ThrowsException_InUnweightedGraph`
+- **Description:** Tests the `getWeight` method in an unweighted graph.
+- **Test Steps:**
+    - Verify that attempting to get weight in an unweighted graph throws an exception.
+
+### `areConnected_ReturnsFalse_ForUnconnectedVertices`
+- **Description:** Tests the `areConnected` method for unconnected vertices.
+- **Test Steps:**
+    - Verify that unconnected vertices return false.
+
+### `bfs_ReturnsCorrectOrder_InUndirectedGraph`
+- **Description:** Tests the BFS traversal in an undirected graph.
+- **Test Steps:**
+    1. Connect vertices.
+    2. Perform BFS traversal and verify the order.
+
+### `dfs_ReturnsCorrectOrder_InDirectedGraph`
+- **Description:** Tests the DFS traversal in a directed graph.
+- **Test Steps:**
+    1. Create a directed graph and connect vertices.
+    2. Perform DFS traversal and verify the order.
+
+### `addVertex_DoesNotIncreaseCount_ForExistingVertex_throws_exception`
+- **Description:** Tests that adding an existing vertex does not increase the count.
+- **Test Steps:**
+    1. Add a vertex.
+    2. Attempt to add the same vertex again.
+    3. Verify the correct exception is thrown, and the count remains the same.
+
+### `connect_ThrowsException_InWeightedGraph_WithoutWeight`
+- **Description:** Tests that connecting vertices in a weighted graph without specifying a weight throws an exception.
+- **Test Steps:**
+    - Verify that connecting vertices without weight in a weighted graph throws an exception.
+
+### `connect_ThrowsException_InUnweightedGraph_WithWeight`
+- **Description:** Tests that connecting vertices with weight in an unweighted graph throws an exception.
+- **Test Steps:**
+    - Verify that connecting vertices with weight in an unweighted graph throws an exception.
+
+### `addConnection_AddsConnectionCorrectly`
+- **Description:** Tests the `addConnection` method, ensuring connections are added correctly.
+- **Test Steps:**
+    1. Create a graph of `Station` objects.
+    2. Add a connection and verify its correctness.
+
+### `getVertices_ReturnsCorrectSet`
+- **Description:** Tests the `getVertices` method, ensuring it returns the correct set of vertices.
+- **Test Steps:**
+    1. Add vertices.
+    2. Verify that the set of vertices is correct.
+
+### `addEdge_AddsEdgeCorrectly`
+- **Description:** Tests the `addEdge` method, ensuring edges are added correctly.
+- **Test Steps:**
+    1. Create a graph of `Station` objects.
+    2. Add an edge and verify its correctness.
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+# HashMapTest Documentation
+
+## Test Methods
+
+### `testPutAndGet`
+- **Description:** Tests the `put` and `get` methods.
+- **Test Steps:**
+    1. Put key-value pairs into the custom hash map.
+    2. Retrieve values using the keys.
+    3. Verify that the retrieved values match the expected values.
+
+### `testContainsKey`
+- **Description:** Tests the `containsKey` method.
+- **Test Steps:**
+    1. Put a key-value pair into the custom hash map.
+    2. Check for the presence of the key.
+    3. Verify that the key is present or absent as expected.
+
+### `testContainsValue`
+- **Description:** Tests the `containsValue` method.
+- **Test Steps:**
+    1. Put key-value pairs into the custom hash map.
+    2. Check for the presence of a value.
+    3. Verify that the value is present or absent as expected.
+
+### `testRemove`
+- **Description:** Tests the `remove` method.
+- **Test Steps:**
+    1. Put a key-value pair into the custom hash map.
+    2. Remove the key from the hash map.
+    3. Check for the absence of the key and the size of the hash map.
+
+### `testSize`
+- **Description:** Tests the `size` method.
+- **Test Steps:**
+    1. Put key-value pairs into the custom hash map.
+    2. Verify that the size of the hash map is correct.
+
+### `testIsEmpty`
+- **Description:** Tests the `isEmpty` method.
+- **Test Steps:**
+    1. Check if the hash map is initially empty.
+    2. Put a key-value pair into the hash map.
+    3. Verify that the hash map is no longer empty.
+
+### `testClear`
+- **Description:** Tests the `clear` method.
+- **Test Steps:**
+    1. Put key-value pairs into the custom hash map.
+    2. Clear the hash map.
+    3. Check if the hash map is empty and has a size of 0.
+
+### `testCollisionHandling`
+- **Description:** Tests collision handling in the custom hash map.
+- **Test Steps:**
+    1. Put key-value pairs into the hash map to create a collision.
+    2. Retrieve values from keys involved in the collision.
+    3. Verify that the retrieved values are correct.
+
+### `testNullKeyHandling`
+- **Description:** Tests handling of null keys in the custom hash map.
+- **Test Steps:**
+    1. Put a key-value pair with a null key.
+    2. Attempt to get a value using the null key.
+    3. Verify that a `NullPointerException` is thrown.
+
+### `testGetOrDefault`
+- **Description:** Tests the `getOrDefault` method.
+- **Test Steps:**
+    1. Put a key-value pair into the custom hash map.
+    2. Use `getOrDefault` to retrieve values with existing and non-existing keys.
+    3. Verify that the method returns the correct values.
+
+### `testEdgeCases`
+- **Description:** Tests edge cases in the custom hash map.
+- **Test Steps:**
+    1. Put a series of key-value pairs into the hash map.
+    2. Verify that the hash map contains a specific key.
+
+### `testRemoveNonExistingKey`
+- **Description:** Tests removing a non-existing key from the custom hash map.
+- **Test Steps:**
+    1. Put a key-value pair into the hash map.
+    2. Attempt to remove a key that does not exist.
+    3. Verify that the existing key is still present.
+
+### `testGetNonExistingKey`
+- **Description:** Tests getting a value for a non-existing key from the custom hash map.
+- **Test Steps:**
+    1. Attempt to get a value for a key that does not exist.
+    2. Verify that the returned value is `null`.
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+# KruskalAlgorithmTest Documentation
+
+## Test Methods
+
+### `testMinimumSpanningTreeOnBasicGraph`
+- **Description:** Tests the Kruskal's algorithm on a basic graph.
+- **Test Steps:**
+    1. Create a graph with weighted edges.
+    2. Apply Kruskal's algorithm to find the minimum spanning tree.
+    3. Verify that the minimum spanning tree contains the expected edges.
+
+### `testMinimumSpanningTreeOnDisconnectedGraph`
+- **Description:** Tests the Kruskal's algorithm on a disconnected graph.
+- **Test Steps:**
+    1. Create a graph with weighted edges.
+    2. Apply Kruskal's algorithm to find the minimum spanning tree.
+    3. Verify that the minimum spanning tree contains the expected edges.
+
+### `testMinimumSpanningTreeOnGraphWithCycles`
+- **Description:** Tests the Kruskal's algorithm on a graph with cycles.
+- **Test Steps:**
+    1. Create a graph with weighted edges forming cycles.
+    2. Apply Kruskal's algorithm to find the minimum spanning tree.
+    3. Verify that the minimum spanning tree contains the expected edges.
+
+### `testMinimumSpanningTreeOnGraphWithDuplicateEdges`
+- **Description:** Tests the Kruskal's algorithm on a graph with duplicate edges.
+- **Test Steps:**
+    1. Create a graph with duplicate weighted edges.
+    2. Apply Kruskal's algorithm to find the minimum spanning tree.
+    3. Verify that the minimum spanning tree contains the expected edges.
+
+### `testMinimumSpanningTreeOnGraphWithNegativeWeights`
+- **Description:** Tests the Kruskal's algorithm on a graph with negative weights.
+- **Test Steps:**
+    1. Create a graph with weighted edges containing negative weights.
+    2. Assert that an `IllegalArgumentException` is thrown when applying Kruskal's algorithm.
+
+### `testMinimumSpanningTreeOnLargeGraph`
+- **Description:** Tests the Kruskal's algorithm on a large graph.
+- **Test Steps:**
+    1. Create a large graph with weighted edges.
+    2. Apply Kruskal's algorithm to find the minimum spanning tree.
+    3. Verify that the minimum spanning tree contains the expected number of edges.
+
+### `testMinimumSpanningTreeOnEmptyGraph`
+- **Description:** Tests the Kruskal's algorithm on an empty graph.
+- **Test Steps:**
+    1. Create an empty graph.
+    2. Apply Kruskal's algorithm to find the minimum spanning tree.
+    3. Verify that the minimum spanning tree is empty.
+
+### `testMinimumSpanningTreeOnGraphWithSingleVertex`
+- **Description:** Tests the Kruskal's algorithm on a graph with a single vertex.
+- **Test Steps:**
+    1. Create a graph with a single vertex and no edges.
+    2. Apply Kruskal's algorithm to find the minimum spanning tree.
+    3. Verify that the minimum spanning tree is empty.
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+
+---------------------------------------------------------------------------------------------------------------------------
+# MergeSortTest Documentation
+
+## Test Methods
+
+### `testMergeSortWithEmptyArray`
+- **Description:** Tests the Merge Sort algorithm with an empty array.
+- **Test Steps:**
+    1. Create an empty array.
+    2. Apply Merge Sort to the array.
+    3. Verify that the array remains empty after sorting.
+
+### `testMergeSortWithAlreadySortedArray`
+- **Description:** Tests the Merge Sort algorithm with an already sorted array.
+- **Test Steps:**
+    1. Create a sorted array.
+    2. Apply Merge Sort to the array.
+    3. Verify that the array remains unchanged after sorting.
+
+### `testMergeSortWithDuplicateValues`
+- **Description:** Tests the Merge Sort algorithm with an array containing duplicate values.
+- **Test Steps:**
+    1. Create an array with duplicate values.
+    2. Apply Merge Sort to the array.
+    3. Verify that the array is sorted, and duplicate values are in the correct order.
+
+### `testMergeSortWithNegativeValues`
+- **Description:** Tests the Merge Sort algorithm with an array containing negative values.
+- **Test Steps:**
+    1. Create an array with negative values.
+    2. Apply Merge Sort to the array.
+    3. Verify that the array is sorted, and negative values are in the correct order.
+
+### `testMergeSortWithReverseSortedArray`
+- **Description:** Tests the Merge Sort algorithm with a reverse-sorted array.
+- **Test Steps:**
+    1. Create a reverse-sorted array.
+    2. Apply Merge Sort to the array.
+    3. Verify that the array becomes sorted after applying Merge Sort.
+
+### `testMergeSortWithMixedValues`
+- **Description:** Tests the Merge Sort algorithm with an array containing mixed values.
+- **Test Steps:**
+    1. Create an array with mixed positive and negative values.
+    2. Apply Merge Sort to the array.
+    3. Verify that the array is sorted with positive and negative values in the correct order.
+
+### `testMergeSortWithLargeArray`
+- **Description:** Tests the Merge Sort algorithm with a large array.
+- **Test Steps:**
+    1. Generate a large random array.
+    2. Create a sorted copy of the array using Java's built-in sorting.
+    3. Apply Merge Sort to the array.
+    4. Verify that the array becomes sorted after applying Merge Sort.
+    5. Optionally, print the sorted array for inspection.
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+# MinHeapTest Documentation
+
+## Test Methods
+
+### `testInsertAndPeek`
+- **Description:** Tests the insertion of elements into the MinHeap and peeking at the minimum element.
+- **Test Steps:**
+    1. Create a MinHeap.
+    2. Insert elements (5, 3, 8) into the MinHeap.
+    3. Verify that the peek operation returns the minimum element (3).
+
+### `testPop`
+- **Description:** Tests the pop operation on the MinHeap.
+- **Test Steps:**
+    1. Create a MinHeap.
+    2. Insert elements (5, 3, 8) into the MinHeap.
+    3. Perform pop operations and verify that elements are removed in ascending order (3, 5, 8).
+    4. Ensure the MinHeap is empty after all pop operations.
+
+### `testCustomComparator`
+- **Description:** Tests the MinHeap with a custom comparator (reverse order).
+- **Test Steps:**
+    1. Create a MinHeap with a reverse order comparator.
+    2. Insert elements (5, 3, 8) into the MinHeap.
+    3. Perform pop operations and verify that elements are removed in descending order (8, 5, 3).
+    4. Ensure the MinHeap is empty after all pop operations.
+
+### `testIsEmpty`
+- **Description:** Tests the `isEmpty` method of the MinHeap.
+- **Test Steps:**
+    1. Create an empty MinHeap and verify that it is initially empty.
+    2. Insert an element into the MinHeap and verify that it is no longer empty.
+
+### `testSize`
+- **Description:** Tests the `size` method of the MinHeap.
+- **Test Steps:**
+    1. Create a MinHeap and verify that its size is initially 0.
+    2. Insert elements (5, 3) into the MinHeap.
+    3. Verify that the size is correctly updated after insertions and pop operations.
+
+### `testResizeArray`
+- **Description:** Tests the resizing of the underlying array in the MinHeap.
+- **Test Steps:**
+    1. Create a MinHeap and insert 15 elements.
+    2. Verify that the size is 15 and the minimum element is 1.
+
+### `testPeekOnEmptyHeap`
+- **Description:** Tests the `peek` method on an empty MinHeap.
+- **Test Steps:**
+    1. Create an empty MinHeap.
+    2. Verify that calling `peek` on an empty heap throws an `IllegalStateException`.
+
+### `testPopOnEmptyHeap`
+- **Description:** Tests the `pop` method on an empty MinHeap.
+- **Test Steps:**
+    1. Create an empty MinHeap.
+    2. Verify that calling `pop` on an empty heap throws an `IllegalStateException`.
+
+### `testEmptyHeap`
+- **Description:** Tests operations on an empty MinHeap.
+- **Test Steps:**
+    1. Create an empty MinHeap and perform operations like `pop` and `peek`.
+    2. Verify that appropriate exceptions are thrown.
+
+### `testSingleElementHeap`
+- **Description:** Tests operations on a MinHeap with a single element.
+- **Test Steps:**
+    1. Create a MinHeap with a single element (42).
+    2. Perform operations like `pop` and `peek`.
+    3. Verify that the MinHeap becomes empty after the single element is removed.
+
+### `testLargeHeap`
+- **Description:** Tests the MinHeap with a large number of elements.
+- **Test Steps:**
+    1. Create a MinHeap and insert a large number of elements in reverse order.
+    2. Verify that the MinHeap is correctly populated and elements are removed in ascending order.
+
+### `testWithCustomComparator`
+- **Description:** Tests the MinHeap with a custom comparator (reverse order).
+- **Test Steps:**
+    1. Create a MinHeap with a reverse order comparator.
+    2. Insert elements (5, 3, 8) into the MinHeap.
+    3. Perform pop operations and verify that elements are removed in descending order (8, 5, 3).
+
+### `testInsertNullElementThrowsException`
+- **Description:** Tests that inserting a null element into the MinHeap throws an `IllegalArgumentException`.
+- **Test Steps:**
+    1. Create a MinHeap and insert a non-null element.
+    2. Verify that inserting a null element throws an `IllegalArgumentException`.
+
+### `testWithDuplicates`
+- **Description:** Tests the MinHeap with duplicate elements.
+- **Test Steps:**
+    1. Create a MinHeap and insert elements (5, 3, 5).
+    2. Perform pop operations and verify that duplicate elements are correctly removed.
+
+### `testNegativeNumbersAndZero`
+- **Description:** Tests the MinHeap with negative numbers and zero.
+- **Test Steps:**
+    1. Create a MinHeap and insert elements (-5, 0, -3).
+    2. Perform pop operations and verify that elements are removed in ascending order.
+
+### `testPerformance`
+- **Description:** Tests the performance of insertion and popping operations on the MinHeap.
+- **Test Steps:**
+    1. Create a MinHeap and measure the time taken to insert a large number of elements.
+    2. Measure the time taken to pop all elements from the MinHeap.
+    3. Verify that the MinHeap is empty after all popping operations.
+
+### `testBoundary`
+- **Description:** Tests the MinHeap with a large number of elements up to the capacity.
+- **Test Steps:**
+    1. Create a MinHeap and insert elements up to the capacity.
+    2. Verify that the MinHeap is correctly populated, and elements are removed in ascending order.
+
+### `testExceptionMessages`
+- **Description:** Tests the exception messages thrown by the MinHeap.
+- **Test Steps:**
+    1. Create an empty MinHeap and attempt to perform `pop` and `peek`.
+    2. Verify that the exception messages match the expected messages.
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+# SelectionSortTest Documentation
+
+## Test Methods
+
+### `testSelectionSortWithEmptyArray`
+- **Description:** Tests the selection sort algorithm with an empty array.
+- **Test Steps:**
+    1. Create an empty array.
+    2. Apply selection sort on the array.
+    3. Verify that the array remains empty after sorting.
+
+### `testSelectionSortWithAlreadySortedArray`
+- **Description:** Tests the selection sort algorithm with an already sorted array.
+- **Test Steps:**
+    1. Create an array with sorted elements.
+    2. Apply selection sort on the array.
+    3. Verify that the array remains sorted after sorting.
+
+### `testSelectionSortWithDuplicateValues`
+- **Description:** Tests the selection sort algorithm with an array containing duplicate values.
+- **Test Steps:**
+    1. Create an array with duplicate values.
+    2. Apply selection sort on the array.
+    3. Verify that the array becomes sorted with duplicates preserved.
+
+### `testSelectionSortWithNegativeValues`
+- **Description:** Tests the selection sort algorithm with an array containing negative values.
+- **Test Steps:**
+    1. Create an array with negative values.
+    2. Apply selection sort on the array.
+    3. Verify that the array becomes sorted with negative values preserved.
+
+### `testSelectionSortWithLargeArray`
+- **Description:** Tests the selection sort algorithm with a large random array.
+- **Test Steps:**
+    1. Generate a large random array.
+    2. Apply selection sort on the array.
+    3. Verify that the array becomes sorted.
+    4. Compare the sorted array with the result of `Arrays.sort` for validation.
+
+### `testSelectionSortWithReversedArray`
+- **Description:** Tests the selection sort algorithm with a reversed array.
+- **Test Steps:**
+    1. Create an array with reversed elements.
+    2. Apply selection sort on the array.
+    3. Verify that the array becomes sorted.
+
+### `generateLargeRandomArray`
+- **Description:** Generates a large random array for testing.
+- **Test Steps:**
+    1. Generate a random array of the specified size.
+    2. Use the generated array for testing selection sort.
+
+### Additional Notes:
+- All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+
 ### Final Notes:
 
 - I really hope this documentation has been sufficient if not a bit excessive.
 - The Astar and Dijkstra algorithms sometimes come out with different paths. I discussed this with mister Frederik Bonte and he said thats fine because of the way the heuristic uses the Haversine formula.
 - This code used to provide a visual representation of the netherlands with the stations, but since i changed tha manager, it no longer works. The fragments of the previous Manager and Jframe class can be found in the "ForgottenClasses" directory.
-- Due to my job I did't get to finish this project in time so i did not get to submit it. I've had no notes or feedback to lead me for the retake. this is the first submission.
+- Due to my job I didn't get to finish this project in time so i did not get to submit it. I've had no notes or feedback to lead me for the retake. this is the first submission.
+- The location of each data structure and algorithm are described with the src/path.
 
-
-- Finally i'd like to wish Happy Holidays to whoever is reading this :D
+- Finally, I'd like to wish Happy Holidays to whoever took the time to read all this :D
 
 
 

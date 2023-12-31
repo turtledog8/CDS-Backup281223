@@ -1,8 +1,8 @@
-import List.linkedlist.MyLinkedList;
-import Map.MyHashMap;
-import Model.Connection;
-import Model.Station;
-import Tree.binarytree.BinarySearchTree;
+import list.linkedlist.MyLinkedList;
+import map.MyHashMap;
+import model.Connection;
+import model.Station;
+import tree.binarytree.BinarySearchTree;
 import csvreader.CSVReader2;
 import graph.MyGraph;
 import search.BinarySearch;
@@ -86,7 +86,6 @@ public class Manager2 {
             }
             myGraph = new MyGraph<Station>();
 
-// Add connections to the graph
             for (Connection connection : connectionArrayList) {
                 myGraph.connect(connection.getStationA(), connection.getStationB());
             }
@@ -97,7 +96,7 @@ public class Manager2 {
                 myGraph.connect(connection.getStationA(), connection.getStationB());
             }
 
-            //the menu has all of the requirements of the last presentation. Data valiadtion is done in the CSVReader class
+            //the menu has all the requirements of the last presentation. Data validation with regular expressions is done in the CSVReader class
 
             // NOTE TO TEACHER: I am not really sure what was meant by length i assumed it was the connection length which would mean the distance in this case.
             //I did also consider stuff like name length but i think this is the most appropriate sort
@@ -389,36 +388,6 @@ public class Manager2 {
         return resultList;
     }
 
-    ////////////////////********************-- JFRAME METHODS --********************////////////////////
-
-
-
-
-    public List<String> binarySearchStationByNameFormatted(String searchName) {
-        // Convert the search string to lowercase for case-insensitive search
-        searchName = searchName.toLowerCase();
-
-        // Sort the stations by name
-        mergeSortStation.sort(allStations);
-
-        // Perform binary search
-        int startIndex = binarySearch(allStations, searchName);
-
-        List<String> searchResult = new ArrayList<>();
-
-        // Collect matching stations
-        while (startIndex != -1 && startIndex < allStations.length &&
-                allStations[startIndex].getNameMedium().toLowerCase().contains(searchName)) {
-            searchResult.add(allStations[startIndex].toString());
-            startIndex++;
-        }
-
-        return searchResult;
-    }
-
-    public List<Station> getAllStationsList() {
-        return new ArrayList<>(Arrays.asList(allStations));
-    }
 
 ////////////////////********************-- HELPER METHODS --********************////////////////////
 

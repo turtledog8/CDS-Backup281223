@@ -1,11 +1,9 @@
 package test;
 
-import Tree.minheap.MinHeap;
+import tree.minheap.MinHeap;
 import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -240,8 +238,8 @@ public class MinHeapTest {
     void testExceptionMessages() {
         MinHeap<Integer> exceptionHeap = new MinHeap<>();
 
-        assertThrows(IllegalStateException.class, () -> exceptionHeap.pop(), "Heap is empty. Cannot pop from an empty heap.");
-        assertThrows(IllegalStateException.class, () -> exceptionHeap.peek(), "Heap is empty. Cannot peek into an empty heap.");
+        assertThrows(IllegalStateException.class, exceptionHeap::pop, "Heap is empty. Cannot pop from an empty heap.");
+        assertThrows(IllegalStateException.class, exceptionHeap::peek, "Heap is empty. Cannot peek into an empty heap.");
     }
 
 }

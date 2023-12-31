@@ -1,4 +1,4 @@
-package List.doublelinkedlist;
+package list.doublelinkedlist;
 
 /**
  * Node class for a double-linked list.

@@ -1,6 +1,6 @@
 package traversal;
 
-import List.linkedlist.MyLinkedList;
+import list.linkedlist.MyLinkedList;
 
 import java.util.HashMap;
 import java.util.Map;

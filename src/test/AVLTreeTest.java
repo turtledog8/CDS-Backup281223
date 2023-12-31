@@ -203,7 +203,60 @@ public class AVLTreeTest {
         assertTrue(avlTree.isBalanced());
     }
 
+    @Test
+    public void testIsEmpty() {
+        AVLTree<Integer> avlTree = new AVLTree<Integer>();
+        assertTrue(avlTree.isEmpty());
 
+        avlTree.insert(10);
+        assertFalse(avlTree.isEmpty());
+    }
+
+    @Test
+    public void testSize() {
+        AVLTree<Integer> avlTree = new AVLTree<Integer>();
+        assertEquals(0, avlTree.size());
+
+        avlTree.insert(10);
+        assertEquals(1, avlTree.size());
+
+        avlTree.insert(20);
+        assertEquals(2, avlTree.size());
+    }
+
+    @Test
+    public void testContains() {
+        AVLTree<Integer> avlTree = new AVLTree<Integer>();
+        assertFalse(avlTree.contains(10));
+
+        avlTree.insert(10);
+        assertTrue(avlTree.contains(10));
+
+        avlTree.insert(20);
+        assertFalse(avlTree.contains(15));
+    }
+
+    @Test
+    public void testGet() {
+        AVLTree<Integer> avlTree = new AVLTree<Integer>();
+        assertNull(avlTree.get(10));
+
+        avlTree.insert(10);
+        assertEquals(Integer.valueOf(10), avlTree.get(10));
+
+        avlTree.insert(20);
+        assertNull(avlTree.get(15));
+    }
+
+    @Test
+    public void testGraphViz() {
+        AVLTree<Integer> avlTree = new AVLTree<Integer>();
+        assertEquals("digraph AVLTree {\n}\n", avlTree.graphViz());
+
+        avlTree.insert(10);
+        avlTree.insert(20);
+        assertEquals("digraph AVLTree {\n  \"10\" -> \"20\"\n}\n", avlTree.graphViz());
+    }
 
 
 

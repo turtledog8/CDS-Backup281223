@@ -1,6 +1,6 @@
-package List.linkedlist;
+package list.linkedlist;
 
-import List.List;
+import list.List;
 
 import java.util.Iterator;
 /**
@@ -284,5 +284,6 @@ public class MyLinkedList<T> implements List<T>, Iterable<T> {
         result.append("]");
         return result.toString();
     }
+
 
 }
