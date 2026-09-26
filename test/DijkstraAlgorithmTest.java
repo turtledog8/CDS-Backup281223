@@ -1,4 +1,3 @@
-package test;
 
 import graph.MyGraph;
 import list.linkedlist.MyLinkedList;

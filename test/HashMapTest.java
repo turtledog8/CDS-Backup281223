@@ -1,4 +1,3 @@
-package test;
 
 import static org.junit.Assert.*;
 
@@ -116,6 +115,44 @@ public class HashMapTest {
     @Test
     public void testGetNonExistingKey() {
         assertNull(customHashMap.get("NonExistingKey"));
+    }
+
+    @Test
+    public void testPutExistingKeyReplacesValue() {
+        customHashMap.put("One", 1);
+        customHashMap.put("One", 11);
+        assertEquals(Integer.valueOf(11), customHashMap.get("One"));
+        assertEquals(1, customHashMap.size());
+    }
+
+    @Test
+    public void testPutExistingKeyInCollisionChain() {
+        // "Aa" and "BB" have the same hash code, so they end up in the same bucket
+        customHashMap.put("Aa", 1);
+        customHashMap.put("BB", 2);
+        customHashMap.put("BB", 3);
+        customHashMap.put("Aa", 4);
+        assertEquals(Integer.valueOf(4), customHashMap.get("Aa"));
+        assertEquals(Integer.valueOf(3), customHashMap.get("BB"));
+        assertEquals(2, customHashMap.size());
+    }
+
+    @Test
+    public void testSizeStaysCorrectAfterResize() {
+        for (int i = 0; i < 100; i++) {
+            customHashMap.put("key" + i, i);
+        }
+        assertEquals(100, customHashMap.size());
+        for (int i = 0; i < 100; i++) {
+            assertEquals(Integer.valueOf(i), customHashMap.get("key" + i));
+        }
+    }
+
+    @Test
+    public void testNegativeHashCodeKey() {
+        // the hash code of this string is Integer.MIN_VALUE
+        customHashMap.put("polygenelubricants", 1);
+        assertEquals(Integer.valueOf(1), customHashMap.get("polygenelubricants"));
     }
 }
 

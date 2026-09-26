@@ -96,11 +96,14 @@ public class KruskalAlgorithm<T> {
 
     public static class DisjointSet<U> {
         private final Map<U, U> parent;
+        private final Map<U, Integer> rank;
 
         public DisjointSet(Collection<U> elements) {
             parent = new HashMap<>();
+            rank = new HashMap<>();
             for (U element : elements) {
                 parent.put(element, element);
+                rank.put(element, 0);
             }
         }
 
@@ -123,7 +126,16 @@ public class KruskalAlgorithm<T> {
 
             if (!root1.equals(root2)) {
                 // Union by rank: attach the shorter tree to the root of the taller tree
-                parent.put(root1, root2);
+                int rank1 = rank.get(root1);
+                int rank2 = rank.get(root2);
+                if (rank1 < rank2) {
+                    parent.put(root1, root2);
+                } else if (rank1 > rank2) {
+                    parent.put(root2, root1);
+                } else {
+                    parent.put(root2, root1);
+                    rank.put(root1, rank1 + 1);
+                }
             }
         }
     }

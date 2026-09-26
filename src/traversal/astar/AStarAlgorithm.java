@@ -36,6 +36,7 @@ public class AStarAlgorithm<T> {
         MyHashMap<T, T> cameFrom = new MyHashMap<>();
         gScores = new MyHashMap<>();
         fScores = new MyHashMap<>();
+        steps.clear(); // the steps of an earlier search should not stay
 
         gScores.put(start, 0.0);
         fScores.put(start, getHeuristicCostToDestination(start, goal));

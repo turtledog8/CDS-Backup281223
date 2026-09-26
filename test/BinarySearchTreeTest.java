@@ -1,4 +1,3 @@
-package test;
 
 import tree.binarytree.BinarySearchTree;
 import org.junit.jupiter.api.Test;

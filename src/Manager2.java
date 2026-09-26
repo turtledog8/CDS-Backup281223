@@ -12,6 +12,7 @@ import traversal.GraphWeight;
 import traversal.astar.AStarAlgorithm;
 import traversal.dijkstra.DijkstraAlgorithm;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,9 +21,8 @@ import java.util.Scanner;
 public class Manager2 {
     Scanner scanner = new Scanner(System.in);
 
-    ///MAKE SURE THE PATHS ARE FINE BC SRC/... DIDNT WORK ON YOUR HOME PC
-    private final String stationsFilePath = "CDS-Backup281223/src/resources/stations.csv";
-    private final String connectionsFilePath = "CDS-Backup281223/src/resources/tracks.csv";
+    private final String stationsFilePath = resolvePath("src/resources/stations.csv");
+    private final String connectionsFilePath = resolvePath("src/resources/tracks.csv");
     private final CSVReader2 csvReader = new CSVReader2();
 
     private final ArrayList<Station> stationArrayList = csvReader.readStationsCSV(stationsFilePath);
@@ -44,57 +44,51 @@ public class Manager2 {
 
      MyGraph<Station> myGraph;
 
+    // builds every data structure once, so the menu doesn't rebuild them on each choice
+    public void initialise() {
+        stationsLinkedList = new MyLinkedList<>();
+
+        allStations = new Station[stationArrayList.size()];
+        mergeSortStation = new MergeSort<>();
+
+        selectionSort = new SelectionSort<>();
+        mergeSort = new MergeSort<>();
+
+        binarySearch = new BinarySearch<>();
+
+        hashMap = new MyHashMap<>();
+
+        connectionsArray = connectionArrayList.toArray(new Connection[0]);
+        binaryTree = new BinarySearchTree<>();
+
+        graphWeight = new GraphWeight<>();
+
+        // weighted, so that dijkstra and astar use the track distances and not the number of stops
+        myGraph = new MyGraph<Station>(false, true);
+        addConnectionsToGraph(connectionArrayList);
+
+        int counterStation = 0;
+        for (Station station : stationArrayList) {
+            stationsLinkedList.add(station);
+            allStations[counterStation] = station;
+            try {
+                binaryTree.insert(station);
+            } catch (IllegalArgumentException e) {
+                // the tree is ordered by name and doesn't accept two stations with the same name
+                System.out.println("Not added to the binary search tree (duplicate name): " + station.getNameMedium());
+            }
+            hashMap.put(station.getCode(), station);
+            counterStation++;
+        }
+
+        // the binary search needs the stations sorted, so it is done once here
+        mergeSortStation.sort(allStations);
+    }
+
+    // initialise() has to be called before this, Main does it so the window can share the same data
     public void setMenuChoice() {
         while (true) {
             int menuChoice;
-
-            stationsLinkedList = new MyLinkedList<>();
-
-            allStations = new Station[stationArrayList.size()];
-            mergeSortStation = new MergeSort<>();
-
-            selectionSort = new SelectionSort<>();
-            mergeSort = new MergeSort<>();
-
-            binarySearch = new BinarySearch<>();
-
-            hashMap = new MyHashMap<>();
-
-            connectionsArray = connectionArrayList.toArray(new Connection[0]);
-            binaryTree = new BinarySearchTree<>();
-
-            graphWeight = new GraphWeight<>();
-
-            myGraph = new MyGraph<Station>();
-            addConnectionsToGraph(connectionArrayList);
-
-
-
-            int counterStation = 0;
-            for (Station station : stationArrayList) {
-                stationsLinkedList.add(station);
-                allStations[counterStation] = station;
-                binaryTree.insert(station);
-                hashMap.put(station.getCode(), station);
-                counterStation++;
-            }
-
-            int counterConnection = 0;
-            for (Connection connection : connectionArrayList) {
-                connectionsArray[counterConnection] = connection;
-                counterConnection++;
-            }
-            myGraph = new MyGraph<Station>();
-
-            for (Connection connection : connectionArrayList) {
-                myGraph.connect(connection.getStationA(), connection.getStationB());
-            }
-
-
-            // Add connections to the graph
-            for (Connection connection : connectionArrayList) {
-                myGraph.connect(connection.getStationA(), connection.getStationB());
-            }
 
             //the menu has all the requirements of the last presentation. Data validation with regular expressions is done in the CSVReader class
 
@@ -113,10 +107,16 @@ public class Manager2 {
                     7- Determine which stations fall within "the rectangle" using the BFS algorithm
                     8- Find shortest Path using the dijkstra algorithm
                     9- Find shortest path using the Astar algorithm
+                    0- Exit
 
                     """);
             System.out.print("Choice: ");
-            menuChoice = scanner.nextInt();
+            try {
+                menuChoice = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Please try again.");
+                continue;
+            }
 
             switch (menuChoice) {
                 case 1 -> {
@@ -148,6 +148,7 @@ public class Manager2 {
                 }
                 case 0 -> {
                     System.out.println("Bye Bye!");
+                    return;
                 }
                 default -> {
                     System.out.println("Invalid choice. Please try again.");
@@ -160,10 +161,8 @@ public class Manager2 {
 
     ////////////////////********************-- MENU METHODS --********************////////////////////
     private void SearchStationByNameLinear() {
-        scanner.nextLine();
-
         System.out.print("Enter the name of the station: ");
-        String searchName = scanner.nextLine().toLowerCase();
+        String searchName = scanner.nextLine().trim().toLowerCase();
 
         boolean found = false;
         for (Station station : stationArrayList) {
@@ -181,14 +180,23 @@ public class Manager2 {
 
     private void SearchStationByNameBinary() {
         System.out.print("Enter the name of the station: ");
-        String searchName = scanner.next().toLowerCase();
-
-        mergeSortStation.sort(allStations);
+        String searchName = scanner.nextLine().trim().toLowerCase();
 
         int index = binarySearch(allStations, searchName);
 
         if (index != -1) {
-            System.out.println("Station found: " + allStations[index]);
+            // the stations are sorted, so every other match sits right next to the one found
+            int first = index;
+            while (first > 0 && allStations[first - 1].getNameMedium().toLowerCase().startsWith(searchName)) {
+                first--;
+            }
+            int last = index;
+            while (last < allStations.length - 1 && allStations[last + 1].getNameMedium().toLowerCase().startsWith(searchName)) {
+                last++;
+            }
+            for (int i = first; i <= last; i++) {
+                System.out.println("Station found: " + allStations[i]);
+            }
         } else {
             System.out.println("No station found with the provided name.");
         }
@@ -216,7 +224,7 @@ public class Manager2 {
 
     private void SearchStationUsingBinarySearchTree() {
         System.out.print("Enter part of the station name to search: ");
-        String searchSubstring = scanner.next().toLowerCase();
+        String searchSubstring = scanner.nextLine().trim().toLowerCase();
 
         MyLinkedList<Station> matchingStations = binaryTree.searchBySubstring(searchSubstring);
 
@@ -233,7 +241,7 @@ public class Manager2 {
 
     private void SearchStationUsingHashMap() {
         System.out.print("Enter part of the station name to search: ");
-        String searchSubstring = scanner.next().toLowerCase();
+        String searchSubstring = scanner.nextLine().trim().toLowerCase();
 
         // Perform search using hash map
         MyLinkedList<Station> matchingStations = hashMap.searchBySubstring(searchSubstring);
@@ -251,10 +259,10 @@ public class Manager2 {
 
     private void findStationsWithinRectangle() {
         System.out.print("Enter the station code for the first station: ");
-        String stationCode1 = scanner.next().toUpperCase();
+        String stationCode1 = scanner.nextLine().trim().toUpperCase();
 
         System.out.print("Enter the station code for the second station: ");
-        String stationCode2 = scanner.next().toUpperCase();
+        String stationCode2 = scanner.nextLine().trim().toUpperCase();
 
         // Find the stations corresponding to the given station codes
         Station station1 = findStationByCode(stationCode1);
@@ -287,9 +295,9 @@ public class Manager2 {
 
     public void findShortestPathDijkstra() {
         System.out.println("Enter The Starting Station Code Of Your Journey: ");
-        String stationCode1 = scanner.next();
+        String stationCode1 = scanner.nextLine().trim();
         System.out.println("Enter The Final Station Code Of Your Journey: ");
-        String stationCode2 = scanner.next();
+        String stationCode2 = scanner.nextLine().trim();
 
         Station startStation = findStationByCode(stationCode1);
         Station endStation = findStationByCode(stationCode2);
@@ -305,6 +313,11 @@ public class Manager2 {
 
                 // Record end time
                 long endTime = System.currentTimeMillis();
+
+                if (path.isEmpty()) {
+                    System.out.println("No path found between " + startStation.getNameMedium() + " and " + endStation.getNameMedium() + ".");
+                    return;
+                }
 
                 // Calculate and print the total distance
                 int totalDistance = calculateTotalDistance(path);
@@ -332,9 +345,9 @@ public class Manager2 {
 
     public void findShortestPathAStar() {
         System.out.println("Enter The Starting Station Code Of Your Journey: ");
-        String stationCode1 = scanner.next();
+        String stationCode1 = scanner.nextLine().trim();
         System.out.println("Enter The Final Station Code Of Your Journey: ");
-        String stationCode2 = scanner.next();
+        String stationCode2 = scanner.nextLine().trim();
 
         Station startStation = findStationByCode(stationCode1);
         Station endStation = findStationByCode(stationCode2);
@@ -350,6 +363,11 @@ public class Manager2 {
 
                 // Record end time
                 long endTime = System.currentTimeMillis();
+
+                if (path.isEmpty()) {
+                    System.out.println("No path found between " + startStation.getNameMedium() + " and " + endStation.getNameMedium() + ".");
+                    return;
+                }
 
                 // Calculate and print the total distance
                 int totalDistance = calculateTotalDistance(path);
@@ -391,8 +409,8 @@ public class Manager2 {
 
 ////////////////////********************-- HELPER METHODS --********************////////////////////
 
-    // Updated binarySearch method to handle searching for a substring
-    protected int binarySearch(Station[] list, String searchSubstring) {
+    // binary search can only work on the start of the name, because that is what the sorted order is based on
+    protected int binarySearch(Station[] list, String searchPrefix) {
         int low = 0;
         int high = list.length - 1;
 
@@ -400,11 +418,11 @@ public class Manager2 {
             int middle = low + (high - low) / 2;
             String currentName = list[middle].getNameMedium().toLowerCase();
 
-            if (currentName.contains(searchSubstring)) {
+            if (currentName.startsWith(searchPrefix)) {
                 return middle;
             }
 
-            if (currentName.compareTo(searchSubstring) < 0) {
+            if (currentName.compareTo(searchPrefix) < 0) {
                 low = middle + 1;
             } else {
                 high = middle - 1;
@@ -423,7 +441,19 @@ public class Manager2 {
         }
     }
 
-    protected Station findStationByCode(String stationCode) {
+    // works whether the working directory is the project folder or its parent
+    static String resolvePath(String relativePath) {
+        if (new File(relativePath).exists()) {
+            return relativePath;
+        }
+        return "CDS-Backup281223/" + relativePath;
+    }
+
+    public List<Station> getAllStationsList() {
+        return stationArrayList;
+    }
+
+    public Station findStationByCode(String stationCode) {
         for (Station station : stationArrayList) {
             if (station.getCode().equalsIgnoreCase(stationCode)) {
                 return station;
@@ -448,7 +478,7 @@ public class Manager2 {
         // Return the shortest path
         return resultList;
     }
-    protected MyGraph<Station> getGraph() {
+    public MyGraph<Station> getGraph() {
         return myGraph;
     }
 
@@ -458,7 +488,9 @@ public class Manager2 {
             Station stationA = findStationByName(path.get(i));
             Station stationB = findStationByName(path.get(i + 1));
             Connection connection = findConnection(stationA, stationB);
-            totalDistance += connection.getDistance();
+            if (connection != null) {
+                totalDistance += connection.getDistance();
+            }
         }
         return totalDistance;
     }

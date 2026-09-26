@@ -1,4 +1,3 @@
-package test;
 
 import AVLTree.AVLTree;
 import org.junit.Test;

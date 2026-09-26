@@ -168,6 +168,10 @@ public class MyGraph<T> implements Graph<T> {
 
         Edge<T> edge = new Edge<>(value1, value2);
         weights.put(edge, weight);
+
+        if (!isDirected) {
+            weights.put(new Edge<>(value2, value1), weight);
+        }
     }
 
     /**
@@ -327,6 +331,10 @@ public class MyGraph<T> implements Graph<T> {
 
         Edge<T> edge = new Edge<>(a, b);
         weights.put(edge, weight);
+
+        if (!isDirected) {
+            weights.put(new Edge<>(b, a), weight);
+        }
     }
 
     // Assuming T has a method getHeuristicCost(T destination)
@@ -451,11 +459,15 @@ public class MyGraph<T> implements Graph<T> {
 
         while (!queue.isEmpty()) {
             T currentVertex = queue.poll();
-            stationsInRectangle.add(currentVertex);
+
+            // the whole graph is searched, but only the stations inside the rectangle are kept
+            if (isStationInRectangle((Station) currentVertex, startLatitude, startLongitude,
+                    endLatitude, endLongitude)) {
+                stationsInRectangle.add(currentVertex);
+            }
 
             for (T neighbor : adjacencyList.get(currentVertex)) {
-                if (!visited.get(neighbor) && isStationInRectangle((Station) neighbor, startLatitude, startLongitude,
-                        endLatitude, endLongitude)) {
+                if (!visited.get(neighbor)) {
                     visited.put(neighbor, true);
                     queue.add(neighbor);
                 }

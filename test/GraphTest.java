@@ -1,4 +1,3 @@
-package test;
 
 import graph.MyGraph;
 import model.Connection;
@@ -237,6 +236,47 @@ public void getVertices_ReturnsCorrectSet() {
         graph2.addEdge(stationA, stationB, 4);
 
         assertTrue(graph2.areConnected(stationA, stationB));
+    }
+
+    @Test
+    public void getWeight_IsTheSameInBothDirections_InUndirectedGraph() {
+        graph = new MyGraph<Integer>(false, true);
+        graph.connect(1, 2, 3.5);
+
+        assertEquals(3.5, graph.getWeight(1, 2), 0.0001);
+        assertEquals(3.5, graph.getWeight(2, 1), 0.0001);
+    }
+
+    @Test
+    public void getWeight_GoesOneWay_InDirectedGraph() {
+        graph = new MyGraph<Integer>(true, true);
+        graph.connect(1, 2, 3.5);
+
+        assertEquals(3.5, graph.getWeight(1, 2), 0.0001);
+        assertEquals(Double.POSITIVE_INFINITY, graph.getWeight(2, 1));
+    }
+
+    @Test
+    public void findStationsInRectangle_ReturnsOnlyStationsInsideTheRectangle() {
+        MyGraph<Station> stationGraph = new MyGraph<Station>();
+
+        Station inside1 = new Station(1, "in1", "uic1", "Inside 1", 52.0, 5.0);
+        Station inside2 = new Station(2, "in2", "uic2", "Inside 2", 52.5, 5.5);
+        Station outside = new Station(3, "out", "uic3", "Outside", 40.0, 10.0);
+        Station alone = new Station(4, "alone", "uic4", "Alone", 60.0, 20.0);
+
+        // the two stations inside are only connected through the one outside
+        stationGraph.connect(inside1, outside);
+        stationGraph.connect(outside, inside2);
+        stationGraph.addVertex(alone);
+
+        List<Station> result = stationGraph.findStationsInRectangle(51.0, 4.0, 53.0, 6.0);
+
+        assertEquals(2, result.size());
+        assertTrue(result.contains(inside1));
+        assertTrue(result.contains(inside2));
+        assertFalse(result.contains(outside));
+        assertFalse(result.contains(alone));
     }
 
 }

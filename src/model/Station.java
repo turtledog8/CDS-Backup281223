@@ -10,6 +10,7 @@ public class Station implements Comparable<Station> {
     private String nameMedium;
     private double geo_lat;
     private double geo_lng;
+    private String country = "";
 
     /**
      * Constructs a Station object with the specified attributes.
@@ -28,6 +29,25 @@ public class Station implements Comparable<Station> {
         this.uic = uic;
         this.geo_lat = geo_lat;
         this.geo_lng = geo_lng;
+    }
+
+    /**
+     * Constructs a Station object that also knows the country it is in.
+     *
+     * @param country the country code of the station, for example NL
+     */
+    public Station(int id, String code, String uic, String name, Double geo_lat, Double geo_lng, String country) {
+        this(id, code, uic, name, geo_lat, geo_lng);
+        this.country = country;
+    }
+
+    /**
+     * Gets the country code of the station.
+     *
+     * @return the country code of the station, empty if it is not known
+     */
+    public String getCountry() {
+        return country;
     }
 
     /**
@@ -83,7 +103,10 @@ public class Station implements Comparable<Station> {
             throw new NullPointerException("Station objects cannot be null.");
         }
 
-        return nameMedium.compareTo(o.nameMedium);
+        // ignoring the case keeps the sorted order the same as what the binary search expects,
+        // the normal compare is only used to keep stations with names that differ in case apart
+        int byName = nameMedium.compareToIgnoreCase(o.nameMedium);
+        return byName != 0 ? byName : nameMedium.compareTo(o.nameMedium);
     }
 
 }

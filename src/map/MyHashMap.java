@@ -5,6 +5,7 @@ import list.linkedlist.MyLinkedList;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -56,10 +57,14 @@ public class MyHashMap<K, V> implements CustomMap<K, V> {
         if (current == null) {
             buckets.set(index, newNode);
         } else {
-            while (current.getNext() != null) {
-                if (current.getKey().equals(key)) {
+            // check every node in the bucket, including the last one, for an existing key
+            while (true) {
+                if (Objects.equals(current.getKey(), key)) {
                     current.setValue(value);
                     return;
+                }
+                if (current.getNext() == null) {
+                    break;
                 }
                 current = current.getNext();
             }
@@ -133,7 +138,7 @@ public class MyHashMap<K, V> implements CustomMap<K, V> {
         for (MapNode<K, V> bucket : buckets) {
             MapNode<K, V> current = bucket;
             while (current != null) {
-                if (current.getValue().equals(value)) {
+                if (Objects.equals(current.getValue(), value)) {
                     return true;
                 }
                 current = current.getNext();
@@ -193,9 +198,8 @@ public class MyHashMap<K, V> implements CustomMap<K, V> {
      */
     @Override
     public void clear() {
-        buckets.clear();
-        for (int i = 0; i < DEFAULT_CAPACITY; i++) {
-            buckets.add(null);
+        for (int i = 0; i < buckets.size(); i++) {
+            buckets.set(i, null);
         }
         size = 0;
     }
@@ -249,7 +253,7 @@ public class MyHashMap<K, V> implements CustomMap<K, V> {
         if (key == null) {
             return 0; // or any other appropriate index for null keys
         }
-        return Math.abs(key.hashCode()) % buckets.size();
+        return Math.floorMod(key.hashCode(), buckets.size());
     }
 
     /**
@@ -263,6 +267,9 @@ public class MyHashMap<K, V> implements CustomMap<K, V> {
         for (int i = 0; i < 2 * oldBuckets.size(); i++) {
             buckets.add(null);
         }
+
+        // put() counts every re-inserted entry again, so start from zero
+        size = 0;
 
         for (MapNode<K, V> oldBucket : oldBuckets) {
             MapNode<K, V> current = oldBucket;

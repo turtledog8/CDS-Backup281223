@@ -1,4 +1,3 @@
-package test;
 
 import model.Station;
 import graph.MyGraph;

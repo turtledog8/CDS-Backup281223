@@ -1,4 +1,3 @@
-package test;
 
 import graph.MyGraph;
 import org.junit.Test;
@@ -144,16 +143,13 @@ public class KruskalAlgorithmTest {
 
         List<KruskalAlgorithm.Edge<String>> minimumSpanningTree = kruskalAlgorithm.findMinimumSpanningTree(graph);
         System.out.println(minimumSpanningTree);
-        String expectedString = "[Edge{source=H, destination=G, weight=1.0}," +
-                " Edge{source=G, destination=F, weight=2.0}," +
-                " Edge{source=I, destination=C, weight=2.0}," +
-                " Edge{source=A, destination=B, weight=4.0}," +
-                " Edge{source=I, destination=G, weight=6.0}," +
-                " Edge{source=D, destination=C, weight=7.0}," +
-                " Edge{source=A, destination=H, weight=8.0}," +
-                " Edge{source=D, destination=E, weight=9.0}]";
+        // A-H and B-C both have weight 8, so more than one tree is correct, the size and total weight are what has to match
+        double totalWeight = 0;
+        for (KruskalAlgorithm.Edge<String> edge : minimumSpanningTree) {
+            totalWeight += edge.getWeight();
+        }
         assertEquals(8, minimumSpanningTree.size());
-        assertEquals(expectedString, minimumSpanningTree.toString());
+        assertEquals(39.0, totalWeight, 0.0001);
     }
 
     @Test

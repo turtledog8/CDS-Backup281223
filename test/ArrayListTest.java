@@ -1,4 +1,3 @@
-package test;
 
 import list.arrayLsit.MyArrayList;
 import org.junit.Before;

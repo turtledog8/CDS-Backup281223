@@ -115,10 +115,20 @@ Student number: 527573
 14. [Binary Search (`SearchStationByNameBinary()`)](#binary-search-searchstationbynamebinary)
     1. [Time Complexity and Space Complexity](#time-complexity-and-space-complexity-5)
 
+## Application
+
+15. [Application (Main, Manager2, MyJFrame)](#application-main-manager2-myjframe)
+    1. [Starting the program](#starting-the-program)
+    2. [Data loading (CSVReader2)](#data-loading-csvreader2)
+    3. [Console menu (Manager2)](#console-menu-manager2)
+    4. [Window with the map (MyJFrame)](#window-with-the-map-myjframe)
+
 ## Additional Notes and Overall Summary:
 
-15. [Overall Note](#overall-note)
+16. [Overall Note](#overall-note)
     1. [Additional Note](#additional-note-1)
+
+17. [Acknowledgments](#acknowledgments)
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -413,6 +423,7 @@ src/graph/MyGraph.java
 ### `public void connect(T value1, T value2, double weight)`
 
 - Connects two vertices in the graph with a specified weight.
+- In an undirected graph the weight is stored for both directions, so `getWeight(a, b)` and `getWeight(b, a)` return the same value.
 
 ### `public double getWeight(T value1, T value2)`
 
@@ -473,6 +484,7 @@ src/graph/MyGraph.java
 ### `public list<Station> findStationsInRectangle(double startLatitude, double startLongitude, double endLatitude, double endLongitude)`
 
 - Performs a breadth-first search to find stations within a rectangle defined by GPS coordinates.
+- The whole graph is searched, but only the stations that are inside the rectangle are returned. A station inside the rectangle that can only be reached through a station outside of it is also found.
 
 ## Edge Class
 
@@ -636,6 +648,7 @@ src/map/MyHashMap.java
 #### `public void put(K key, V value)`
 
 - Associates the specified value with the specified key in this map.
+- Every node of the bucket is checked, so if the key is already in the map its value is replaced and the size does not change.
 
 #### `public V get(K key)`
 
@@ -685,11 +698,11 @@ src/map/MyHashMap.java
 
 #### `private int getBucketIndex(K key)`
 
-- Calculates the bucket index for a given key based on its hash code.
+- Calculates the bucket index for a given key based on its hash code, using `Math.floorMod` so the index is never negative.
 
 #### `private void resize()`
 
-- Resizes the hashmap when the load factor exceeds the threshold. Rehashes all existing entries to new buckets.
+- Resizes the hashmap when the load factor exceeds the threshold. Rehashes all existing entries to new buckets. The size is reset to 0 before the entries are put again, so they are not counted twice.
 
 ## Inner Class: MapNode<K, V>
 
@@ -1237,6 +1250,11 @@ src/traversal/astar/AStarAlgorithm.java
 #### `private double getHeuristicCostToDestination(T start, T goal)`
 
 - Calculates the heuristic cost (estimated cost) from the start to the goal using the Haversine formula.
+- The result is in kilometres, which is the same unit as the track distances used as weights in the graph.
+
+#### `public List<T> getSteps()`
+
+- Returns the vertices in the order the algorithm took them from the open set. The list is cleared at the start of every search.
 
 ## COMPLEXITY
 - The space and time complexities are specifically for the classes in the current program.
@@ -1352,14 +1370,14 @@ src/traversal/kruskal/KruskalAlgorithm.java
 
 ### The overall time complexity is O(E * log(V)), where E is the number of edges and V is the number of vertices.
 
-## Space Complexity: O(V)
+## Space Complexity: O(V + E)
 
 **Edges and Disjoint Set:**
 - The space complexity is primarily influenced by the storage of edges and the disjoint set data structure.
 - The edgeQueue stores all edges, contributing to space proportional to the number of edges.
-- The disjoint set maintains parent information for each vertex, contributing to space proportional to the number of vertices.
+- The disjoint set maintains parent and rank information for each vertex, contributing to space proportional to the number of vertices.
 
-### Therefore, the overall space complexity is O(V), where V is the number of vertices.
+### Therefore, the overall space complexity is O(V + E), where V is the number of vertices and E is the number of edges.
 
 ## Visualisation:
 ![Kruskal Complexity](KruskalComplexity.png)
@@ -1369,7 +1387,7 @@ Functions:
 Time complexity: j(V) = E * log(V)
 
 
-Space Complexity: k(V) = V
+Space Complexity: k(V) = V (the graph only shows the V part, the queue of edges adds the E part)
 
 
 ## Efficiency and Justification:
@@ -1378,7 +1396,7 @@ The Kruskal algorithm is known for its efficiency in finding the minimum spannin
 
 The use of a priority queue ensures that edges are processed in ascending order of weight, optimizing the search for the minimum spanning tree. The algorithm employs the disjoint set data structure to efficiently check and avoid cycles during edge addition.
 
-The implementation handles negative weights, throwing an exception if the graph contains negative weights or cycles, ensuring the algorithm's correctness under specific conditions. The union-by-rank and path compression strategies in the disjoint set help maintain efficiency during find and union operations.
+The implementation handles negative weights, throwing an exception if the graph contains negative weights, ensuring the algorithm's correctness under specific conditions. The union-by-rank and path compression strategies in the disjoint set help maintain efficiency during find and union operations.
 
 Kruskal's algorithm provides a balance between simplicity and efficiency for finding minimum spanning trees in graphs.
 
@@ -1403,6 +1421,8 @@ src/Manager2.java
 - **Time Complexity:**
     - O(log n) - Logarithmic time complexity.
     - The binary search reduces the search space by half in each step. The algorithm assumes that the `allStations` array is sorted before performing the search.
+    - The `allStations` array is sorted once with merge sort when the program starts (`initialise()`), in the order of `Station.compareTo`, which ignores the case of the name.
+    - The search matches the start of the name (not any part of it, because that is the order the array is sorted in). When a station is found, the stations next to it are checked so that every station with that start is printed, which adds O(k) for k matches.
 
 - **Space Complexity:**
     - O(1) - Constant space complexity.
@@ -1411,7 +1431,7 @@ src/Manager2.java
 ### Overall Note:
 
 - Binary search provides a more efficient time complexity compared to linear search when the dataset is sorted.
-- Sorting the array using merge sort (`mergeSortStation`) adds an additional O(n log n) time complexity to the binary search, but this cost is usually outweighed by the faster search time.
+- Sorting the array using merge sort (`mergeSortStation`) costs O(n log n), but it is done only once when the program starts, so it does not add to the cost of each search.
 
 ### Additional Note:
 
@@ -1420,13 +1440,55 @@ src/Manager2.java
 
 ---------------------------------------------------------------------------------------------------------------------------
 
+# Application (Main, Manager2, MyJFrame)
+
+## Location:
+src/Main.java, src/Manager2.java, src/MyJFrame.java, src/csvreader/CSVReader2.java, src/model/Station.java, src/model/Connection.java
+
+## Starting the program
+
+- `Main` loads all the data once (`Manager2.initialise()`) and then asks how to start: `1` console, `2` window with the map, `3` both.
+- The first program argument (`console`, `gui` or `both`) can be given instead, then the question is skipped.
+- The window runs on its own thread (the Swing event dispatch thread), so the console menu can run at the same time. Both use the same `Manager2`, so they share the same data.
+- In the "both" mode, choosing `0` in the console only ends the console menu. The window stays open until it is closed.
+
+## Data loading (CSVReader2)
+
+- The files `stations.csv` and `tracks.csv` are read from `src/resources`. `Manager2.resolvePath` finds them when the program is started from the project folder or from the folder above it.
+- Lines are split on commas, but commas inside double quotes are ignored.
+- The station data is validated with regular expressions (ID, code, UIC, name, latitude and longitude).
+- A `Station` uses the `name_medium` column as its name and also keeps the `country` column (`getCountry()`).
+- `tracks.csv` has no header line, so every line is a connection. A connection whose station code is not in `stations.csv` is skipped, so the graph never contains a missing (`null`) station.
+- Station codes are stored in lowercase and the searches by code ignore the case.
+
+## Console menu (Manager2)
+
+- All the data structures are built once when the program starts and not on every menu choice.
+- The graph is a weighted, undirected `MyGraph`, so Dijkstra and A* find the path with the shortest total track distance and not the path with the fewest stations.
+- The menu options are: linear search by name, binary search by name, merge sort and selection sort of the connections by distance, the binary search tree, the hash map with the station code as key, the stations inside the rectangle between two stations (BFS), the shortest path with Dijkstra and the shortest path with A*.
+- Option `0` exits. Input that is not a number gives an "Invalid choice" message and all questions read a full line, so names with spaces work.
+- When there is no path between two stations the program says so instead of printing a distance of 0.
+- A station that can't be added to the binary search tree because another station has the same name is reported and skipped.
+
+## Window with the map (MyJFrame)
+
+- The map is the image `src/resources/908px-Netherlands_location_map.svg.png`. Every station of the Netherlands is a red dot. The position of a dot is a linear mapping of its latitude and longitude between the four bounds `MAP_WEST`, `MAP_EAST`, `MAP_NORTH` and `MAP_SOUTH` at the top of the class, which are the area of the world that the image covers.
+- The user enters two station codes, picks Dijkstra or A* and the shortest path is drawn as a blue line, with the start in green and the end in orange. The route and the total distance are written under the map.
+- Zoom: mouse wheel (around the mouse position), the zoom buttons and "Reset View". The maximum zoom is 20 times. After a path is found the map zooms so that the whole path is visible.
+- The map is moved by dragging it with the mouse.
+- Clicking a station shows a popup with its name and code. The popup can also set the station as the start or the end of the path.
+- The map scales with the window and keeps its proportions. The divider between the map and the text below it can be moved.
+
+---------------------------------------------------------------------------------------------------------------------------
+
 # Tests and Validation
-# Tests and Validation
+
+The tests are in the `test/` folder, which is a test source folder of the project. Both JUnit 4 and JUnit 5 are used, depending on the test class.
 
 ## ArrayListTest
 
 ### Location:
-`src/test/ArrayListTest.java`
+`test/ArrayListTest.java`
 
 ### Description:
 This test class validates the functionality of the `MyArrayList` implementation, ensuring that it meets the specified requirements.
@@ -1513,7 +1575,7 @@ This test class validates the functionality of the `MyArrayList` implementation,
 ## AStarAlgorithmTest
 
 ### Location:
-`src/test/AStarAlgorithmTest.java`
+`test/AStarAlgorithmTest.java`
 
 ### Description:
 This test class validates the functionality of the `AStarAlgorithm` class, which is responsible for finding the shortest path in a graph using the A* algorithm. The tests cover various scenarios, including finding paths in different graph structures and handling edge cases.
@@ -2141,6 +2203,26 @@ This test class validates the functionality of the `AStarAlgorithm` class, which
     1. Create a graph of `Station` objects.
     2. Add an edge and verify its correctness.
 
+### `getWeight_IsTheSameInBothDirections_InUndirectedGraph`
+- **Description:** Tests that the weight of a connection in a weighted, undirected graph is stored for both directions.
+- **Test Steps:**
+    1. Connect two vertices with a weight in a weighted, undirected graph.
+    2. Verify that `getWeight(1, 2)` and `getWeight(2, 1)` both return that weight.
+
+### `getWeight_GoesOneWay_InDirectedGraph`
+- **Description:** Tests that the weight of a connection in a directed graph only exists in one direction.
+- **Test Steps:**
+    1. Connect two vertices with a weight in a weighted, directed graph.
+    2. Verify that `getWeight(1, 2)` returns the weight.
+    3. Verify that `getWeight(2, 1)` returns positive infinity.
+
+### `findStationsInRectangle_ReturnsOnlyStationsInsideTheRectangle`
+- **Description:** Tests `findStationsInRectangle`.
+- **Test Steps:**
+    1. Create a graph where two stations inside the rectangle are only connected through a station outside of it, and add a separate station that is also outside.
+    2. Search for the stations inside the rectangle.
+    3. Verify that exactly the two stations inside the rectangle are returned.
+
 ### Additional Notes:
 - All test methods achieve code coverage of 100% (class, method and line).
 ---------------------------------------------------------------------------------------------------------------------------
@@ -2236,6 +2318,31 @@ This test class validates the functionality of the `AStarAlgorithm` class, which
     1. Attempt to get a value for a key that does not exist.
     2. Verify that the returned value is `null`.
 
+### `testPutExistingKeyReplacesValue`
+- **Description:** Tests that putting a key that is already in the map replaces its value.
+- **Test Steps:**
+    1. Put a key twice with different values.
+    2. Verify that `get` returns the second value and that the size is 1.
+
+### `testPutExistingKeyInCollisionChain`
+- **Description:** Tests replacing values of keys that are in the same bucket.
+- **Test Steps:**
+    1. Put the keys "Aa" and "BB" (they have the same hash code, so they end up in the same bucket).
+    2. Put both keys again with new values.
+    3. Verify that both keys return their new values and that the size is 2.
+
+### `testSizeStaysCorrectAfterResize`
+- **Description:** Tests that the size is correct after the map has been resized.
+- **Test Steps:**
+    1. Put 100 different keys, which makes the map resize several times.
+    2. Verify that the size is 100 and that every key still returns its value.
+
+### `testNegativeHashCodeKey`
+- **Description:** Tests a key whose hash code is `Integer.MIN_VALUE`.
+- **Test Steps:**
+    1. Put the key "polygenelubricants" (its hash code is `Integer.MIN_VALUE`).
+    2. Verify that the value can be retrieved.
+
 ### Additional Notes:
 - All test methods achieve code coverage of 100% (class, method and line).
 ---------------------------------------------------------------------------------------------------------------------------
@@ -2282,7 +2389,7 @@ This test class validates the functionality of the `AStarAlgorithm` class, which
 - **Test Steps:**
     1. Create a large graph with weighted edges.
     2. Apply Kruskal's algorithm to find the minimum spanning tree.
-    3. Verify that the minimum spanning tree contains the expected number of edges.
+    3. Verify that the minimum spanning tree contains 8 edges and that their total weight is 39. The exact edges are not compared, because two edges have the same weight (A-H and B-C, both 8), so more than one tree is correct.
 
 ### `testMinimumSpanningTreeOnEmptyGraph`
 - **Description:** Tests the Kruskal's algorithm on an empty graph.
@@ -2539,6 +2646,21 @@ This test class validates the functionality of the `AStarAlgorithm` class, which
 
 ### Additional Notes:
 - All test methods achieve code coverage of 100% (class, method and line).
+---------------------------------------------------------------------------------------------------------------------------
+
+# Acknowledgments
+
+This project was originally written for the Complex Data Structures course in December 2023. In September 2026, about three years later, I went back to it, looked through the whole code and fixed what was wrong or unfinished. The main things I changed are:
+
+- **Hash map:** putting an existing key no longer adds a duplicate, the size is no longer counted twice after a resize and the bucket index can't be negative anymore.
+- **Graph and paths:** the graph is now weighted, so Dijkstra and A* use the track distances and not the number of stations. Weights of undirected graphs are stored in both directions.
+- **Data:** the CSV reader handles quoted fields, uses the right name column, keeps the country of a station, no longer skips the first track and skips tracks with station codes that don't exist.
+- **Console menu:** the data is built once, option `0` exits, wrong input doesn't crash the program, binary search matches the start of a name and a missing path is reported.
+- **Small algorithm fixes:** Kruskal now really uses union by rank, the steps of A* are cleared on every search and the search for the stations inside a rectangle only returns stations that are inside it.
+- **Tests:** I moved them to a `test/` folder, ran all of them again, changed the Kruskal test on the large graph so it doesn't depend on which of two equal edges is chosen and added tests for the hash map, the weights of the graph and the rectangle search.
+- **Window with the map:** I brought the visual part back as `MyJFrame`. It has a new map, zoom, moving the map, a popup with the name and the code of a station and it can be started together with the console menu or on its own.
+- **Documentation:** I updated it for all of the above. The Final Notes below are left as I wrote them for the original submission.
+
 ---------------------------------------------------------------------------------------------------------------------------
 
 ### Final Notes:

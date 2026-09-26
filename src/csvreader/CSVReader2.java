@@ -32,6 +32,38 @@ public class CSVReader2 {
     }
 
     /**
+     * Splits a CSV line on commas, ignoring commas inside double quotes.
+     *
+     * @param line the line to split
+     * @return the trimmed fields without their surrounding quotes
+     */
+    private String[] splitCsvLine(String line) {
+        List<String> fields = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        boolean inQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (c == '"') {
+                if (inQuotes && i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                    current.append('"');
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (c == ',' && !inQuotes) {
+                fields.add(current.toString().trim());
+                current.setLength(0);
+            } else {
+                current.append(c);
+            }
+        }
+        fields.add(current.toString().trim());
+
+        return fields.toArray(new String[0]);
+    }
+
+    /**
      * Validates station data using regular expressions.
      *
      * @param data the array containing station data
@@ -45,7 +77,7 @@ public class CSVReader2 {
         validateField(data[0], "\\d+", "Invalid station ID");
         validateField(data[1], "[a-zA-Z0-9]+", "Invalid station code");
         validateField(data[2], ".+", "Invalid station UIC");
-        validateField(data[3], ".+", "Invalid station name");
+        validateField(data[4], ".+", "Invalid station name");
         validateField(data[9], "-?\\d+(\\.\\d+)?", "Invalid latitude");
         validateField(data[10], "-?\\d+(\\.\\d+)?", "Invalid longitude");
     }
@@ -77,17 +109,20 @@ public class CSVReader2 {
             String line;
             br.readLine(); // Skip the header line
             while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
+                if (line.isBlank()) {
+                    continue;
+                }
+                String[] data = splitCsvLine(line);
                 validateStationData(data);
 
                 int id = Integer.parseInt(data[0]);
                 String code = data[1].toLowerCase();
                 String uic = data[2];
-                String name = data[3];
+                String name = data[4]; // name_medium
                 double latitude = Double.parseDouble(data[9]);
                 double longitude = Double.parseDouble(data[10]);
 
-                Station station = new Station(id, code, uic, name, latitude, longitude);
+                Station station = new Station(id, code, uic, name, latitude, longitude, data[7]);
                 stations.add(station);
                 nameStationMap.put(code, station);
             }
@@ -106,9 +141,12 @@ public class CSVReader2 {
     public ArrayList<Connection> readConnectionsCSV(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            br.readLine(); // Skip the header line
+            // the tracks file has no header line, so every line is a connection
             while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
+                if (line.isBlank()) {
+                    continue;
+                }
+                String[] data = splitCsvLine(line);
                 String codeA = data[0].toLowerCase();
                 String codeB = data[1].toLowerCase();
                 int distance = Integer.parseInt(data[2]);
@@ -158,6 +196,12 @@ public class CSVReader2 {
     private void matchCodesToStations(String codeA, String codeB, int distance) {
         Station stationA = nameStationMap.get(codeA);
         Station stationB = nameStationMap.get(codeB);
+
+        // some tracks use codes that are not in the stations file, they can't be used
+        if (stationA == null || stationB == null) {
+            return;
+        }
+
         Connection connection = new Connection(stationA, stationB, distance, 0, 0);
         connections.add(connection);
     }

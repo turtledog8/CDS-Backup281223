@@ -1,4 +1,3 @@
-package test;
 
 import tree.minheap.MinHeap;
 import org.junit.jupiter.api.Test;
